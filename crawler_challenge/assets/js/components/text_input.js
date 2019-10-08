@@ -3,7 +3,7 @@ import React from "react";
 import PropType from "prop-types";
 
 const TextInput = props => {
-  const { class_name, type, id, placeholder } = props;
+  const { class_name, type, id, placeholder, ...rest } = props;
 
   return (
     <input
@@ -11,6 +11,7 @@ const TextInput = props => {
       type={type}
       id={id}
       placeholder={placeholder}
+      {...rest}
     />
   );
 };

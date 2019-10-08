@@ -3,10 +3,10 @@ import React from "react";
 import PropType from "prop-types";
 
 const Button = props => {
-  const { class_name, type, name, children } = props;
+  const { class_name, type, name, children, ...rest } = props;
 
   return (
-    <button className={class_name} type={type} name={name}>
+    <button className={class_name} type={type} name={name} {...rest}>
       {children}
     </button>
   );

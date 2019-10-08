@@ -3,12 +3,12 @@ import React from "react";
 import PropType from "prop-types";
 
 const SelectInput = props => {
-  const { class_name, options } = props;
+  const { class_name, options, ...rest } = props;
 
   return (
-    <select className={class_name}>
+    <select className={class_name} {...rest}>
       {options.map(option => (
-        <option key={options.key} value={option.key}>
+        <option key={option.key} value={option.key}>
           {option.name}
         </option>
       ))}
