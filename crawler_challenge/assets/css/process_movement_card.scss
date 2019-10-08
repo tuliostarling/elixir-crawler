@@ -1,0 +1,29 @@
+@import 'common/_variables';
+
+.card {
+  .movements_content {
+    > .card-title {
+      font-weight: $medium;
+    }
+  }
+
+  .movement_wrapper {
+    margin-bottom: 15px;
+    border-bottom: 1px solid $color-silver-chalice;
+    padding-bottom: 15px;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+   &__date {
+    font-size: 12px;
+    color: $color-silver-chalice;
+   }
+
+   &__move {
+    font-size: 14px;
+   }
+  }
+}

@@ -1,0 +1,28 @@
+@import 'common/_variables';
+
+.wrapper {
+  &__card_header {
+    margin: 50px auto 10px auto;
+
+    &___title {
+      font-size: 28px;
+
+      @media(max-width: $tablet) {
+        margin-top: 170px;
+      }
+    }
+
+    &___sub_title {
+      font-size: 14px;
+      color: $color-silver-chalice;
+    }
+  }
+
+  &__movement_card {
+    padding-left: 0 !important;
+
+    @media(max-width: $mobile-large) {
+      padding-left: 0.75rem !important;
+    }
+  }
+}

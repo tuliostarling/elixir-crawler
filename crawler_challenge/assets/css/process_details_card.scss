@@ -1,0 +1,19 @@
+@import 'common/_variables';
+
+.card {
+  .details_content {
+    > .card-title {
+      font-size: 18px;
+      font-weight: $medium;
+    }
+  }
+
+  .detail_wrapper {
+    margin-bottom: 15px;
+
+   &__value {
+    font-size: 12px;
+    color: $color-silver-chalice;
+   }
+  }
+}

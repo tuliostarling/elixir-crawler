@@ -20,4 +20,18 @@ import M from "materialize-css";
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 
+import NavbarSearch from "./screens/navbar_search";
+import ProcessScreen from "./screens/process";
+
 M.AutoInit();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const formSelect = document.querySelectorAll(".select_court_input");
+
+  M.FormSelect.init(formSelect, {});
+});
+
+window.Components = {
+  NavbarSearch,
+  ProcessScreen
+};

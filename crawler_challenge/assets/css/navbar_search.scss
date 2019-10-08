@@ -1,0 +1,41 @@
+@import 'common/_variables';
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-mercury;
+
+  @media(max-width: $tablet) {
+    flex-direction: column;
+    padding: 20px;
+    height: fit-content !important;
+  }
+
+  > .input-field {
+    width: 350px;
+    margin: auto 20px 0 0;
+
+    .text_input {
+      background-color: $color-white;
+      border: 1px solid $color-abbey !important;
+      border-radius: 4px;
+      padding-left: 5px;
+    }
+
+    .select-wrapper {
+      margin-top: 8px;
+    }
+  }
+
+  > .btn, &__btn {
+    background-color: $color-abbey;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: $color-abbey;
+      color: $color-white;
+    }
+  }
+}
