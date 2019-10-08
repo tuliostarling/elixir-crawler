@@ -17,7 +17,7 @@ defmodule CrawlerChallengeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    post "/search", SearchController, :create
+    post "/search", SearchController, :index
   end
 
   # Other scopes may use custom stacks.

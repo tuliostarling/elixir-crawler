@@ -45,6 +45,7 @@ defmodule CrawlerChallenge.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:react_phoenix, "~> 1.0.0"},
       {:httpoison, "~> 1.6"},
+      {:poison, "~> 4.0"},
       {:faker, "~> 0.12.0"},
       {:credo, "~> 1.1"},
       {:ex_machina, "~> 2.3"}

@@ -1,4 +1,4 @@
 <%= 
   ReactPhoenix.ClientSide.react_component("Components.NavbarSearch",
-  search_path: Routes.search_path(@conn, :create))
+  search_path: Routes.search_path(@conn, :index))
 %>
