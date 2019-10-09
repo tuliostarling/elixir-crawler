@@ -1,8 +1,12 @@
 defmodule CrawlerChallenge.Scraper do
   def scrapy(body) do
-    movements = scrapy_movements(body)
-    related = scrapy_related(body)
-    details = scrapy_details(body)
+    result = [
+      scrapy_movements(body),
+      scrapy_related(body),
+      scrapy_details(body)
+    ]
+
+    {:ok, result}
   end
 
   defp scrapy_movements(body) do
@@ -40,16 +44,21 @@ defmodule CrawlerChallenge.Scraper do
         |> String.trim()
         |> String.replace(":", "")
 
-      [rest, lawyer_name] =
+      [rest, second_position_name] =
         Floki.find(element, "td:last-child") |> Floki.text() |> String.trim() |> String.split(":")
 
-      [first_position_name, lawyer] = String.split(rest, "\t  \n")
+      [first_position_name, _second_position] = String.split(rest, "\t  \n")
 
-      %{
-        first_position => first_position_name |> String.replace(["\n", "\t"], ""),
-        (lawyer |> String.replace(["\n", "\t"], "")) =>
-          lawyer_name |> String.replace(["\n", "\t", " "], "")
+      first_map = %{
+        "partie" => first_position,
+        "name" => first_position_name |> String.replace(["\n", "\t"], "")
       }
+
+      second_map = %{
+        "lawyer" => second_position_name |> String.replace(["\n", "\t"], "")
+      }
+
+      Map.merge(first_map, second_map)
     end)
   end
 
@@ -113,8 +122,7 @@ defmodule CrawlerChallenge.Scraper do
 
         true ->
           List.insert_at(acc, index, %{
-            "detail" => detail |> String.replace(":", ""),
-            "detail_value" => detail_value
+            "#{detail |> String.replace(":", "")}" => detail_value
           })
       end
     end)
