@@ -1,15 +1,22 @@
 defmodule CrawlerChallengeWeb.SearchController do
   use CrawlerChallengeWeb, :controller
 
-  alias CrawlerChallenge.Search
+  alias CrawlerChallenge.{Parser, Scraper, Searches}
 
-  def index(conn, %{"court" => court, "process_n" => process_n} = params) do
+  def index(conn, %{"court" => _court, "process_n" => process_n}) do
     {:ok, url} =
       process_n
       |> String.slice(0, 15)
-      |> Search.mount_search_url(process_n)
-      |> Search.return_location()
+      |> Searches.mount_search_url(process_n)
+      |> Searches.return_location()
 
-    {:ok, body} = Search.get_html_body(url)
+    {:ok, body} = Searches.get_html_body(url)
+
+    result =
+      body
+      |> Parser.parse()
+      |> Scraper.scrapy()
+
+    conn
   end
 end

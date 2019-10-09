@@ -1,6 +1,6 @@
-defmodule CrawlerChallenge.Search do
+defmodule CrawlerChallenge.Searches do
   def return_location(url) do
-    case HTTPoison.get(url, [], hackney: [cookie: "JSESSIONID=anyjsession.cpopg1"]) do
+    case HTTPoison.get(url, [], hackney: [cookie: "JSESSIONID=1381E2C506E4CB29CD78C1D0B940ADBA.cpopg1"]) do
       {:ok, %{headers: headers}} ->
         url =
           headers
@@ -16,11 +16,9 @@ defmodule CrawlerChallenge.Search do
   end
 
   def get_html_body(url) do
-    case HTTPoison.get(url, [], hackney: [cookie: "JSESSIONID=anyjsession.cpopg1"]) do
-      {:ok, response} ->
-          require IEx
-          IEx.pry()
-          {:ok, response}
+    case HTTPoison.get(url, [], hackney: [cookie: "JSESSIONID=1381E2C506E4CB29CD78C1D0B940ADBA.cpopg1"]) do
+      {:ok, %{body: body}} ->
+        {:ok, body}
       {:error, %{reason: reason}} ->
         {:error, reason}
     end
