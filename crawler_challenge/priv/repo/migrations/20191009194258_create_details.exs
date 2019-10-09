@@ -3,7 +3,6 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateDetails do
 
   def change do
     create table(:details) do
-      add :process_number, :integer
       add :class, :string
       add :area, :string
       add :subject, :string

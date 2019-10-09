@@ -21,6 +21,14 @@ defmodule CrawlerChallenge.Scraper do
       movement = Floki.find(element, "td span") |> Floki.text() |> String.trim()
       date = Floki.find(element, "td:first-child") |> Floki.text() |> String.trim()
 
+      movement =
+        case movement do
+          "" -> Floki.find(element, "td:nth-child(3)") |> Floki.text() |> String.trim()
+
+          _ ->
+            movement
+        end
+
       %{
         "movement" => movement,
         "date" => date

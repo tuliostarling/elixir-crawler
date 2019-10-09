@@ -5,6 +5,6 @@ config :crawler_challenge, CrawlerChallenge.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "tuliostarling",
   password: "85295198",
-  database: "crawler_challenge_dev",
+  database: "crawler_challenge_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
