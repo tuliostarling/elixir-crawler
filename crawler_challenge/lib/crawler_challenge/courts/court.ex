@@ -13,7 +13,7 @@ defmodule CrawlerChallenge.Courts.Court do
     timestamps()
   end
 
-  @required_fields ~w(name, initials)a
+  @required_fields ~w(name initials)a
 
   @doc false
   def changeset(court, attrs) do

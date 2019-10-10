@@ -7,9 +7,9 @@ defmodule CrawlerChallenge.Details.Detail do
   schema "details" do
     field :area, :string
     field :class, :string
-    field :distribution_date, :naive_datetime
+    field :distribution_date, :string
     field :judge, :string
-    field :stock_price, :integer
+    field :stock_price, :string
     field :subject, :string
 
     belongs_to :process, Processes.Process
@@ -17,7 +17,7 @@ defmodule CrawlerChallenge.Details.Detail do
     timestamps()
   end
 
-  @required_fields ~w(area, class, distribution_date, judge, stock_price, subject, process_id)a
+  @required_fields ~w(area class distribution_date judge stock_price subject process_id)a
 
   @doc false
   def changeset(detail, attrs) do

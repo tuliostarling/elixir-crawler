@@ -14,7 +14,7 @@ defmodule CrawlerChallenge.Parties.Partie do
     timestamps()
   end
 
-  @required_fields ~w(lawyer, name, partie, process_id)a
+  @required_fields ~w(lawyer name partie process_id)a
 
   @doc false
   def changeset(partie, attrs) do

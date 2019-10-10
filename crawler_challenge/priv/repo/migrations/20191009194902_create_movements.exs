@@ -3,8 +3,8 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateMovements do
 
   def change do
     create table(:movements) do
-      add :movement, :string
-      add :movement_date, :naive_datetime
+      add :movement, :text
+      add :movement_date, :string
 
       timestamps()
     end

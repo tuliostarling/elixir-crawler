@@ -5,7 +5,7 @@ defmodule CrawlerChallenge.Processes.Process do
   alias CrawlerChallenge.{Courts, Details, Movements, Parties}
 
   schema "processes" do
-    field :process_number, :integer
+    field :process_number, :string
 
     belongs_to :court, Courts.Court
     has_many :details, Details.Detail
@@ -15,7 +15,7 @@ defmodule CrawlerChallenge.Processes.Process do
     timestamps()
   end
 
-  @required_fields ~w(process_number, court_id)a
+  @required_fields ~w(process_number court_id)a
 
   @doc false
   def changeset(process, attrs) do

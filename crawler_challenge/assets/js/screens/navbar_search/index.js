@@ -17,8 +17,11 @@ export default class NavbarSearch extends Component {
       },
 
       options: [
-        { name: "Selecione um tribunal", key: 0 },
-        { name: "Tribunal de Justiça do Alagoas (TJAL)", key: 1 }
+        { name: "Selecione um tribunal", key: '' },
+        {
+          name: "Tribunal de Justiça do Alagoas (TJAL)",
+          key: "Tribunal de Justiça do Alagoas"
+        }
       ]
     };
 

@@ -6,14 +6,14 @@ defmodule CrawlerChallenge.Movements.Movement do
 
   schema "movements" do
     field :movement, :string
-    field :movement_date, :naive_datetime
+    field :movement_date, :string
 
     belongs_to :process, Processes.Process
 
     timestamps()
   end
 
-  @required_fields ~w(movement, movement_date, process_id)a
+  @required_fields ~w(movement movement_date process_id)a
 
   @doc false
   def changeset(movement, attrs) do

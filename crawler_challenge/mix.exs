@@ -49,7 +49,8 @@ defmodule CrawlerChallenge.MixProject do
       {:faker, "~> 0.12.0"},
       {:credo, "~> 1.1"},
       {:ex_machina, "~> 2.3"},
-      {:floki, "~> 0.23.0"}
+      {:floki, "~> 0.23.0"},
+      {:timex, "~> 3.6"}
     ]
   end
 

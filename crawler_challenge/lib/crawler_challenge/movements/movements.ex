@@ -50,6 +50,9 @@ defmodule CrawlerChallenge.Movements do
 
   """
   def create_movement(attrs \\ %{}) do
+    require IEx
+    IEx.pry()
+
     %Movement{}
     |> Movement.changeset(attrs)
     |> Repo.insert()

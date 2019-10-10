@@ -37,6 +37,8 @@ defmodule CrawlerChallenge.Processes do
   """
   def get_process!(id), do: Repo.get!(Process, id)
 
+  def get_process_by_number(number), do: Repo.get_by(Process, process_number: number)
+
   @doc """
   Creates a process.
 

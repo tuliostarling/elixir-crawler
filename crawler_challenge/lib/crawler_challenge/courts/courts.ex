@@ -37,6 +37,8 @@ defmodule CrawlerChallenge.Courts do
   """
   def get_court!(id), do: Repo.get!(Court, id)
 
+  def get_court_by_name(name), do: Repo.get_by(Court, name: name)
+
   @doc """
   Creates a court.
 

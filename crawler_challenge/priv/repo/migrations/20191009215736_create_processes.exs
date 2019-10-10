@@ -3,7 +3,7 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateProcesses do
 
   def change do
     create table(:processes) do
-      add :process_number, :integer
+      add :process_number, :string
 
       timestamps()
     end
