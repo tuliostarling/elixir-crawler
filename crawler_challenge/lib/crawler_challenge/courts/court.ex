@@ -4,6 +4,7 @@ defmodule CrawlerChallenge.Courts.Court do
 
   alias CrawlerChallenge.Processes
 
+  @derive {Jason.Encoder, except: [:__meta__, :processes]}
   schema "courts" do
     field(:name, :string)
     field(:initials, :string)

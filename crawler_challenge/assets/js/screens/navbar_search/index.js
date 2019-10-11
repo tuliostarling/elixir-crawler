@@ -46,7 +46,8 @@ export default class NavbarSearch extends Component {
   }
 
   render() {
-    const { options } = this.state;
+    // const { options } = this.state;
+    const { courts } = this.props
 
     return (
       <header>
@@ -55,7 +56,7 @@ export default class NavbarSearch extends Component {
             <div className="input-field col s12">
               <SelectInput
                 class_name="select_court_input"
-                options={options}
+                options={courts}
                 onChange={evt => this.handleChange("court", evt)}
               />
             </div>

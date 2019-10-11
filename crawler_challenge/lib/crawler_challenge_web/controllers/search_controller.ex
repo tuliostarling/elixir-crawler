@@ -3,17 +3,16 @@ defmodule CrawlerChallengeWeb.SearchController do
 
   alias CrawlerChallenge.{Details, Movements, Parties, Processes, Repo, Searches}
 
-  def index(conn, %{"court" => court, "process_n" => process_n}) do
-    search_url =
-      process_n
-      |> String.slice(0, 15)
-      |> Searches.mount_search_url(process_n)
+  alias CrawlerChallengeWeb.ProcessView
 
-    with {:ok, show_url} <- Searches.return_show_url(search_url),
+  def index(conn, %{"court" => court, "process_n" => process_n}) do
+    with {:ok, show_url} <- Searches.return_show_url(process_n),
          {:ok, body} <- Searches.get_html_body(show_url),
          {:ok, crawled_data} <- Searches.get_crawled_data(body),
-         {:ok, _result} <- insert_all_data(process_n, court, crawled_data) do
-      
+         {:ok, result} <- insert_all_data(process_n, court, crawled_data) do
+      conn
+      |> put_view(ProcessView)
+      |> render("show.html", result)
     else
       {:error, reason} ->
         {:error, reason}

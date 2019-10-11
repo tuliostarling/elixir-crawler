@@ -3,15 +3,26 @@ defmodule CrawlerChallenge.Searches do
 
   @domain "https://www2.tjal.jus.br"
 
-  def return_show_url(url) do
-    case HTTPoison.get(url, [],
-           hackney: [cookie: "JSESSIONID=1381E2C506E4CB29CD78C1D0B940ADBA.cpopg1"]
-         ) do
-      {:ok, %{headers: headers}} -> 
+  def return_show_url(process_n) do
+    process_n
+    |> return_search_url()
+    |> HTTPoison.get([], hackney: [cookie: "JSESSIONID=1381E2C506E4CB29CD78C1D0B940ADBA.cpopg1"])
+    |> case do
+      {:ok, %{headers: headers}} ->
         location = get_location(headers)
         {:ok, location}
-      {:error, %{reason: reason}} -> {:error, reason}
+
+      {:error, %{reason: reason}} ->
+        {:error, reason}
     end
+  end
+
+  def return_search_url(nil), do: {:error, :empty_process}
+
+  def return_search_url(process_n) do
+    process_n
+    |> String.slice(0, 15)
+    |> mount_search_url(process_n)
   end
 
   def get_location(nil), do: nil

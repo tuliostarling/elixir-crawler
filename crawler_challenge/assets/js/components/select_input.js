@@ -8,8 +8,8 @@ const SelectInput = props => {
   return (
     <select className={class_name} {...rest}>
       {options.map(option => (
-        <option key={option.key} value={option.key}>
-          {option.name}
+        <option key={option.id} value={option.name}>
+          {option.name} - ({option.initials})
         </option>
       ))}
     </select>
@@ -20,8 +20,9 @@ SelectInput.propTypes = {
   class_name: PropType.string.isRequired,
   options: PropType.arrayOf(
     PropType.shape({
+      id: PropType.number.isRequired,
       name: PropType.string.isRequired,
-      key: PropType.number.isRequired
+      initials: PropType.string.isRequired
     })
   ).isRequired
 };

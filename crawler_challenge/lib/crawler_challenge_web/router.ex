@@ -16,7 +16,7 @@ defmodule CrawlerChallengeWeb.Router do
   scope "/", CrawlerChallengeWeb do
     pipe_through :browser
 
-    get "/", ProcessController, :index
+    get "/", ProcessController, :show
     post "/search", SearchController, :index
   end
 
