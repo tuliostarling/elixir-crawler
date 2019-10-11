@@ -9,14 +9,9 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias CrawlerChallenge.{Courts.Court, Repo, Processes.Process}
+alias CrawlerChallenge.{Courts.Court, Repo}
 
 Repo.insert(%Court{
   name: "Tribunal de Justiça do Alagoas",
   initials: "TJAL"
-})
-
-Repo.insert(%Process{
-  process_number: "1008126-92.2015.8.26.0132",
-  court_id: 1
 })

@@ -5,12 +5,12 @@ defmodule CrawlerChallenge.Processes.Process do
   alias CrawlerChallenge.{Courts, Details, Movements, Parties}
 
   schema "processes" do
-    field :process_number, :string
+    field(:process_number, :string)
 
-    belongs_to :court, Courts.Court
-    has_many :details, Details.Detail
-    has_many :movements, Movements.Movement
-    has_many :parties, Parties.Partie
+    belongs_to(:court, Courts.Court)
+    has_many(:details, Details.Detail)
+    has_many(:movements, Movements.Movement)
+    has_many(:parties, Parties.Partie)
 
     timestamps()
   end

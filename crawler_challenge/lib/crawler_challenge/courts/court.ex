@@ -5,10 +5,10 @@ defmodule CrawlerChallenge.Courts.Court do
   alias CrawlerChallenge.Processes
 
   schema "courts" do
-    field :name, :string
-    field :initials, :string
+    field(:name, :string)
+    field(:initials, :string)
 
-    has_many :processes, Processes.Process
+    has_many(:processes, Processes.Process)
 
     timestamps()
   end

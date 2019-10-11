@@ -5,10 +5,10 @@ defmodule CrawlerChallenge.Movements.Movement do
   alias CrawlerChallenge.Processes
 
   schema "movements" do
-    field :movement, :string
-    field :movement_date, :string
+    field(:movement, :string)
+    field(:movement_date, :string)
 
-    belongs_to :process, Processes.Process
+    belongs_to(:process, Processes.Process)
 
     timestamps()
   end

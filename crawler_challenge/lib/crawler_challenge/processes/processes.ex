@@ -4,9 +4,12 @@ defmodule CrawlerChallenge.Processes do
   """
 
   import Ecto.Query, warn: false
+  alias CrawlerChallenge.Courts
   alias CrawlerChallenge.Repo
 
   alias CrawlerChallenge.Processes.Process
+
+  alias Ecto.Multi
 
   @doc """
   Returns the list of processes.
@@ -55,6 +58,14 @@ defmodule CrawlerChallenge.Processes do
     %Process{}
     |> Process.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def insert_process_by_multi(process, court) do
+    %{id: court_id} = Courts.get_court_by_name(court)
+    process_params = %{"process_number" => process, "court_id" => court_id}
+
+    Multi.new()
+    |> Multi.insert(:process, Process.changeset(%Process{}, process_params))
   end
 
   @doc """

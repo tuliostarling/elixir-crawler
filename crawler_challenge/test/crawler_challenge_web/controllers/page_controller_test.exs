@@ -1,4 +1,4 @@
-defmodule CrawlerChallengeWeb.PageControllerTest do
+defmodule CrawlerChallengeWeb.ProcessControllerTest do
   use CrawlerChallengeWeb.ConnCase
 
   test "GET /", %{conn: conn} do

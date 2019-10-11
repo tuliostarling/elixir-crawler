@@ -3,10 +3,14 @@ defmodule CrawlerChallenge.Movements do
   The Movements context.
   """
 
+  use Timex
+
   import Ecto.Query, warn: false
   alias CrawlerChallenge.Repo
 
   alias CrawlerChallenge.Movements.Movement
+
+  alias Ecto.Multi
 
   @doc """
   Returns the list of movements.
@@ -50,12 +54,24 @@ defmodule CrawlerChallenge.Movements do
 
   """
   def create_movement(attrs \\ %{}) do
-    require IEx
-    IEx.pry()
-
     %Movement{}
     |> Movement.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def insert_movement_by_multi(multi, attrs) do
+    multi
+    |> Multi.run(:movement, fn _repo, %{process: process} ->
+      movement_params =
+        Enum.map(attrs, fn movement ->
+          Map.put(movement, :inserted_at, Timex.now())
+          |> Map.put(:updated_at, Timex.now())
+          |> Map.merge(%{"process_id" => process.id})
+        end)
+
+      {count, _} = Repo.insert_all("movements", movement_params)
+      {:ok, count}
+    end)
   end
 
   @doc """

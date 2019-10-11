@@ -8,6 +8,8 @@ defmodule CrawlerChallenge.Details do
 
   alias CrawlerChallenge.Details.Detail
 
+  alias Ecto.Multi
+
   @doc """
   Returns the list of details.
 
@@ -53,6 +55,16 @@ defmodule CrawlerChallenge.Details do
     %Detail{}
     |> Detail.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def insert_details_by_multi(multi, attrs) do
+    multi
+    |> Multi.run(:detail, fn _repo, %{process: process} ->
+      detail_params = Map.merge(attrs, %{"process_id" => process.id})
+
+      Detail.changeset(%Detail{}, detail_params)
+      |> Repo.insert()
+    end)
   end
 
   @doc """

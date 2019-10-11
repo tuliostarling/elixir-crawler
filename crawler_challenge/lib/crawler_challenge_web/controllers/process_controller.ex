@@ -1,4 +1,4 @@
-defmodule CrawlerChallengeWeb.PageController do
+defmodule CrawlerChallengeWeb.ProcessController do
   use CrawlerChallengeWeb, :controller
 
   def index(conn, _params) do

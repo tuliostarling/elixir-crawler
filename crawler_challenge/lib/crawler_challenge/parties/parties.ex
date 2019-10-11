@@ -3,10 +3,14 @@ defmodule CrawlerChallenge.Parties do
   The Parties context.
   """
 
+  use Timex
+
   import Ecto.Query, warn: false
   alias CrawlerChallenge.Repo
 
   alias CrawlerChallenge.Parties.Partie
+
+  alias Ecto.Multi
 
   @doc """
   Returns the list of parties.
@@ -53,6 +57,21 @@ defmodule CrawlerChallenge.Parties do
     %Partie{}
     |> Partie.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def insert_parties_by_multi(multi, attrs) do
+    multi
+    |> Multi.run(:parties, fn _repo, %{process: process} ->
+      partie_params =
+        Enum.map(attrs, fn partie ->
+          Map.put(partie, :inserted_at, Timex.now())
+          |> Map.put(:updated_at, Timex.now())
+          |> Map.merge(%{"process_id" => process.id})
+        end)
+
+      {count, _} = Repo.insert_all("parties", partie_params)
+      {:ok, count}
+    end)
   end
 
   @doc """
