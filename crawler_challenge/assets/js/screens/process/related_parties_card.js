@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import PropType from "prop-types";
+
 export const RelatedPartiesCard = props => {
   const { parties } = props;
   return (
@@ -24,4 +26,22 @@ export const RelatedPartiesCard = props => {
       </div>
     </div>
   );
+};
+
+RelatedPartiesCard.propTypes = {
+  parties: PropType.arrayOf(
+    PropType.shape({
+      id: PropType.number.isRequired,
+      process_id: PropType.number.isRequired,
+      name: PropType.string.isRequired,
+      partie: PropType.string.isRequired,
+      person_name_position: PropType.string,
+      position: PropType.string
+    })
+  ).isRequired
+};
+
+RelatedPartiesCard.defaultProps = {
+  person_name_position: "",
+  position: ""
 };

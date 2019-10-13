@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import PropType from "prop-types";
+
 import "babel-polyfill";
 
 import { Button, SelectInput, TextInput } from "../../components";
@@ -75,3 +77,13 @@ export default class NavbarSearch extends Component {
     );
   }
 }
+
+NavbarSearch.propTypes = {
+  courts: PropType.arrayOf(
+    PropType.shape({
+      id: PropType.number.isRequired,
+      name: PropType.string.isRequired,
+      initials: PropType.string.isRequired
+    })
+  ).isRequired
+};

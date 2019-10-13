@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 
+import PropType from "prop-types";
+
 import { MovementCard } from "./movement_card";
 import { DetailsCard } from "./details_card";
 import { RelatedPartiesCard } from "./related_parties_card";
@@ -10,6 +12,8 @@ export default class ProcessScreen extends Component {
     super(props);
 
     const { process } = this.props;
+
+    console.log(process)
 
     this.state = {
       process: process
@@ -55,3 +59,46 @@ export default class ProcessScreen extends Component {
     return <div className="wrapper">{this.render_empty_or_card(process)}</div>;
   }
 }
+
+ProcessScreen.propTypes = {
+  process: PropType.objectOf(
+    PropType.shape({
+      id: PropType.number.isRequired,
+      court_id: PropType.object.isRequired,
+      process_number: PropType.string.isRequired,
+      details: PropType.arrayOf(
+        PropType.shape({
+          id: PropType.number.isRequired,
+          process_id: PropType.number.isRequired,
+          area: PropType.string.isRequired,
+          class: PropType.string.isRequired,
+          control: PropType.string.isRequired,
+          distribution_date: PropType.string.isRequired,
+          judge: PropType.string.isRequired,
+          other_subject: PropType.string,
+          process_number: PropType.string.isRequired,
+          stock_price: PropType.string.isRequired,
+          subject: PropType.string.isRequired
+        })
+      ).isRequired,
+      movements: PropType.arrayOf(
+        PropType.shape({
+          id: PropType.number.isRequired,
+          process_id: PropType.number.isRequired,
+          movement: PropType.string.isRequired,
+          movement_date: PropType.string.isRequired
+        })
+      ).isRequired,
+      parties: PropType.arrayOf(
+        PropType.shape({
+          id: PropType.number.isRequired,
+          process_id: PropType.number.isRequired,
+          name: PropType.string.isRequired,
+          partie: PropType.string.isRequired,
+          person_name_position: PropType.string.isRequired,
+          position: PropType.string.isRequired
+        })
+      ).isRequired
+    })
+  ).isRequired
+};

@@ -1,5 +1,7 @@
 import React from "react";
 
+import PropType from "prop-types";
+
 export const MovementCard = props => {
   const { movements } = props;
 
@@ -17,4 +19,15 @@ export const MovementCard = props => {
       </div>
     </div>
   );
+};
+
+MovementCard.propTypes = {
+  movements: PropType.arrayOf(
+    PropType.shape({
+      id: PropType.number.isRequired,
+      process_id: PropType.number.isRequired,
+      movement: PropType.string.isRequired,
+      movement_date: PropType.string.isRequired
+    })
+  ).isRequired
 };
