@@ -4,6 +4,7 @@ defmodule CrawlerChallenge.Parties.Partie do
 
   alias CrawlerChallenge.Processes
 
+  @derive {Jason.Encoder, except: [:__meta__, :process]}
   schema "parties" do
     field(:person_name_position, :string)
     field(:position, :string)

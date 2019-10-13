@@ -1,0 +1,23 @@
+@import 'common/_variables';
+
+.wrapper {
+  &__empty_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 50px auto 10px auto;
+
+    &___title {
+      font-size: 32px;
+      color: $color-silver-chalice;
+
+      @media(max-width: $tablet) {
+        margin-top: 170px;
+      }
+
+      @media(max-width: $mobile-large) {
+        font-size: 18px;
+      }
+    }
+  }
+}

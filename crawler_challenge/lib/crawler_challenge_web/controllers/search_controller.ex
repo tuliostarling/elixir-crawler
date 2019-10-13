@@ -9,10 +9,12 @@ defmodule CrawlerChallengeWeb.SearchController do
     with {:ok, show_url} <- Searches.return_show_url(process_n),
          {:ok, body} <- Searches.get_html_body(show_url),
          {:ok, crawled_data} <- Searches.get_crawled_data(body),
-         {:ok, result} <- insert_all_data(process_n, court, crawled_data) do
+         {:ok, %{process: process}} <- insert_all_data(process_n, court, crawled_data) do
+      process =
+        Processes.get_process_by_id_and_preload(process, [:details, :movements, :parties, :court])
+
       conn
-      |> put_view(ProcessView)
-      |> render("show.html", result)
+      |> render(ProcessView, :index, %{process: process})
     else
       {:error, reason} ->
         {:error, reason}
@@ -28,7 +30,7 @@ defmodule CrawlerChallengeWeb.SearchController do
     |> Repo.transaction()
     |> case do
       {:ok, result} -> {:ok, result}
-      {:error, reason} -> {:error, reason}
+      {:error, _module, reason} -> {:error, reason}
     end
   end
 end

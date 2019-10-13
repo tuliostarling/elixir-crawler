@@ -14,15 +14,7 @@ export default class NavbarSearch extends Component {
       search_attrs: {
         court: "",
         process_n: ""
-      },
-
-      options: [
-        { name: "Selecione um tribunal", key: '' },
-        {
-          name: "Tribunal de Justiça do Alagoas (TJAL)",
-          key: "Tribunal de Justiça do Alagoas"
-        }
-      ]
+      }
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +25,7 @@ export default class NavbarSearch extends Component {
     const { search_attrs } = this.state;
 
     try {
-      await Api.post(search_path, search_attrs);
+      const result = await Api.post(search_path, search_attrs);
     } catch (error) {
       console.log(error)
     }
@@ -46,7 +38,6 @@ export default class NavbarSearch extends Component {
   }
 
   render() {
-    // const { options } = this.state;
     const { courts } = this.props
 
     return (

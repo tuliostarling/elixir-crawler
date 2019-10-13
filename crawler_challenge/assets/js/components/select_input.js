@@ -7,6 +7,7 @@ const SelectInput = props => {
 
   return (
     <select className={class_name} {...rest}>
+      <option value="">Selecione o tribunal</option>
       {options.map(option => (
         <option key={option.id} value={option.name}>
           {option.name} - ({option.initials})

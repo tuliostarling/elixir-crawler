@@ -10,6 +10,10 @@
       @media(max-width: $tablet) {
         margin-top: 170px;
       }
+
+      @media(max-width: $mobile-large) {
+        font-size: 18px;
+      }
     }
 
     &___sub_title {

@@ -1,26 +1,27 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { MovementCard } from "./movement_card";
 import { DetailsCard } from "./details_card";
 import { RelatedPartiesCard } from "./related_parties_card";
+import { EmptyPage } from "./empty";
 
 export default class ProcessScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    const { process } = this.props;
+
+    this.state = {
+      process: process
+    };
   }
 
-  // Precisar do nome do processo, data de distribuição
-  // Passar por props pro component MovementCard um array com os dados de movimento do processo
-  // Passar por props pro component DetailsCard os dados de detalhes do processo
-
-  render() {
+  render_card(process) {
     return (
-      <div className="wrapper">
+      <Fragment>
         <div className="wrapper__card_header">
           <h4 className="wrapper__card_header___title">
-            Processo n. 1008126-92.2015.8.26.0132 do TJAL
+            Processo n. {process.process_number} do TJAL
           </h4>
           <span className="wrapper__card_header___sub_title">
             Distribuído em 09/11/2017
@@ -29,14 +30,28 @@ export default class ProcessScreen extends Component {
 
         <div className="row">
           <div className="col s12 m8 l8 wrapper__movement_card">
-            <MovementCard />
+            <MovementCard movements={process.movements} />
           </div>
           <div className="col s12 m4 l4">
-            <DetailsCard />
-            <RelatedPartiesCard />
+            <DetailsCard details={process.details} />
+            <RelatedPartiesCard parties={process.parties} />
           </div>
         </div>
-      </div>
+      </Fragment>
     );
+  }
+
+  render_empty_or_card(process) {
+    if (process != null) {
+      return this.render_card(process);
+    }
+
+    return <EmptyPage />;
+  }
+
+  render() {
+    const { process } = this.props;
+
+    return <div className="wrapper">{this.render_empty_or_card(process)}</div>;
   }
 }

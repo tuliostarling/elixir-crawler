@@ -1,0 +1,2 @@
+<%= ReactPhoenix.ClientSide.react_component("Components.ProcessScreen",
+  process: @process) %>

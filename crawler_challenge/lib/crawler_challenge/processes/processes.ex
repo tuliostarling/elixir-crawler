@@ -40,9 +40,15 @@ defmodule CrawlerChallenge.Processes do
   """
   def get_process!(id), do: Repo.get!(Process, id)
 
-  def get_process_by_number(number), do: Repo.get_by(Process, process_number: number)
+  def get_process_by_id_and_preload(%{id: id}, associations) do
+    Repo.get!(Process, id)
+    |> Repo.preload(associations)
+  end
 
-  def get_last_process, do: Repo.one(from p in Process, order_by: [desc: p.id], limit: 1)
+  def get_last_process_and_preload(associations) do
+    Repo.one(from(p in Process, order_by: [desc: p.id], limit: 1))
+    |> Repo.preload(associations)
+  end
 
   @doc """
   Creates a process.

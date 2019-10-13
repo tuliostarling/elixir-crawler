@@ -4,6 +4,7 @@ defmodule CrawlerChallenge.Processes.Process do
 
   alias CrawlerChallenge.{Courts, Details, Movements, Parties}
 
+  @derive {Jason.Encoder, except: [:__meta__, :court]}
   schema "processes" do
     field(:process_number, :string)
 

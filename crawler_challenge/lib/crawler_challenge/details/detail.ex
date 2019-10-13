@@ -4,6 +4,7 @@ defmodule CrawlerChallenge.Details.Detail do
 
   alias CrawlerChallenge.Processes
 
+  @derive {Jason.Encoder, except: [:__meta__, :process]}
   schema "details" do
     field(:area, :string)
     field(:class, :string)
@@ -21,7 +22,7 @@ defmodule CrawlerChallenge.Details.Detail do
   end
 
   @optional_files ~w(control other_subject)a
-  @required_fields ~w(process_number area class distribution_date judge stock_price subject other_subject process_id)a
+  @required_fields ~w(process_number area class distribution_date judge stock_price subject process_id)a
 
   @doc false
   def changeset(detail, attrs) do
