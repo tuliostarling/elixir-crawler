@@ -64,7 +64,8 @@ defmodule CrawlerChallenge.Parties do
     |> Multi.run(:parties, fn _repo, %{process: process} ->
       partie_params =
         Enum.map(attrs, fn partie ->
-          Map.put(partie, :inserted_at, Timex.now())
+          partie
+          |> Map.put(:inserted_at, Timex.now())
           |> Map.put(:updated_at, Timex.now())
           |> Map.merge(%{"process_id" => process.id})
         end)

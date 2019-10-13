@@ -2,8 +2,8 @@ defmodule CrawlerChallenge.Scraper do
   def scrapy(body) do
     result = [
       list_movements: scrapy_movements(body),
-      list_parties: scrapy_parties(body) |> List.flatten(),
-      list_details: scrapy_details(body) |> List.delete_at(0) |> Enum.into(%{})
+      list_parties: body |> scrapy_parties() |> List.flatten(),
+      list_details: body |> scrapy_details() |> List.delete_at(0) |> Enum.into(%{})
     ]
 
     {:ok, result}
@@ -19,15 +19,16 @@ defmodule CrawlerChallenge.Scraper do
   defp scrapy_movements_data(element) do
     %{
       "movement" =>
-        find_movement_data(element, Floki.find(element, "td span"))
+        element
+        |> find_movement_data(Floki.find(element, "td span"))
         |> String.trim()
         |> String.replace(["\n", "\t"], ""),
-      "movement_date" => Floki.find(element, "td:first-child") |> Floki.text() |> String.trim()
+      "movement_date" => element |> Floki.find("td:first-child") |> Floki.text() |> String.trim()
     }
   end
 
   defp find_movement_data(element, [{_, [{_, _}], []}]),
-    do: Floki.find(element, "td:nth-child(3)") |> Floki.text()
+    do: element |> Floki.find("td:nth-child(3)") |> Floki.text()
 
   defp find_movement_data(_element, movement), do: Floki.text(movement)
   # Scraping movements - ending
@@ -58,7 +59,8 @@ defmodule CrawlerChallenge.Scraper do
   defp mount_first_map(element) do
     %{
       "partie" =>
-        Floki.find(element, "td:first-child span")
+        element
+        |> Floki.find("td:first-child span")
         |> Floki.text()
         |> String.trim()
         |> String.replace(":", ""),
@@ -110,7 +112,8 @@ defmodule CrawlerChallenge.Scraper do
   end
 
   defp scrapy_td_last_child(element) do
-    Floki.find(element, "td:last-child")
+    element
+    |> Floki.find("td:last-child")
     |> List.first()
     |> Tuple.to_list()
     |> List.last()
@@ -163,7 +166,7 @@ defmodule CrawlerChallenge.Scraper do
       |> String.trim()
       |> convert_name_to_field_name_db()
 
-    detail_value = Floki.find(element, "td:nth-child(2) span") |> Floki.text() |> String.trim()
+    detail_value = element |> Floki.find("td:nth-child(2) span") |> Floki.text() |> String.trim()
 
     Map.merge(acc, %{detail => detail_value})
   end
@@ -183,7 +186,7 @@ defmodule CrawlerChallenge.Scraper do
       |> Floki.text()
       |> String.trim()
 
-    detail_value = Floki.find(element, "td:nth-child(2) span") |> Floki.text() |> String.trim()
+    detail_value = element |> Floki.find("td:nth-child(2) span") |> Floki.text() |> String.trim()
 
     [detail, detail_value]
   end

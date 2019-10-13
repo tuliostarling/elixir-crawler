@@ -8,6 +8,5 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateCourts do
 
       timestamps()
     end
-
   end
 end

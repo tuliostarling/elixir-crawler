@@ -45,7 +45,8 @@ defmodule CrawlerChallenge.Processes do
   def get_process_by_number(number), do: Repo.get_by(Process, process_number: number)
 
   def get_process_by_id_and_preload(%{id: id}, associations) do
-    Repo.get!(Process, id)
+    Process
+    |> Repo.get!(id)
     |> Repo.preload(associations)
   end
 
@@ -64,7 +65,7 @@ defmodule CrawlerChallenge.Processes do
 
     case result > 0 do
       true ->
-        {:valid, data |> Repo.preload([:details, :movements, :parties, :court])}
+        {:valid, Repo.preload(data, [:details, :movements, :parties, :court])}
 
       false ->
         {:ok, _result} = delete_process(data)
@@ -73,7 +74,10 @@ defmodule CrawlerChallenge.Processes do
   end
 
   def get_last_process_and_preload(associations) do
-    Repo.one(from(p in Process, order_by: [desc: p.id], limit: 1))
+    query = from(p in Process, order_by: [desc: p.id], limit: 1)
+
+    query
+    |> Repo.one()
     |> Repo.preload(associations)
   end
 

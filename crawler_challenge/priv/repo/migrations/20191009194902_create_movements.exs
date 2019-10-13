@@ -8,6 +8,5 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateMovements do
 
       timestamps()
     end
-
   end
 end

@@ -1,5 +1,5 @@
 defmodule CrawlerChallenge.Searches do
-  alias CrawlerChallenge.{Movements, Parser, Processes, Scraper}
+  alias CrawlerChallenge.{Parser, Scraper}
 
   @domain "https://www2.tjal.jus.br"
 

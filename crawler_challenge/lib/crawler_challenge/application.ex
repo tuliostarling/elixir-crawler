@@ -5,6 +5,8 @@ defmodule CrawlerChallenge.Application do
 
   use Application
 
+  alias CrawlerChallengeWeb.Endpoint
+
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
@@ -25,7 +27,7 @@ defmodule CrawlerChallenge.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    CrawlerChallengeWeb.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end

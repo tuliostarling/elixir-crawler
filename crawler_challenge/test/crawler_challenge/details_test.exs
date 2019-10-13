@@ -6,9 +6,33 @@ defmodule CrawlerChallenge.DetailsTest do
   describe "details" do
     alias CrawlerChallenge.Details.Detail
 
-    @valid_attrs %{area: "some area", class: "some class", distribution_date: ~N[2010-04-17 14:00:00], judge: "some judge", process_number: 42, stock_price: 42, subject: "some subject"}
-    @update_attrs %{area: "some updated area", class: "some updated class", distribution_date: ~N[2011-05-18 15:01:01], judge: "some updated judge", process_number: 43, stock_price: 43, subject: "some updated subject"}
-    @invalid_attrs %{area: nil, class: nil, distribution_date: nil, judge: nil, process_number: nil, stock_price: nil, subject: nil}
+    @valid_attrs %{
+      area: "some area",
+      class: "some class",
+      distribution_date: ~N[2010-04-17 14:00:00],
+      judge: "some judge",
+      process_number: 42,
+      stock_price: 42,
+      subject: "some subject"
+    }
+    @update_attrs %{
+      area: "some updated area",
+      class: "some updated class",
+      distribution_date: ~N[2011-05-18 15:01:01],
+      judge: "some updated judge",
+      process_number: 43,
+      stock_price: 43,
+      subject: "some updated subject"
+    }
+    @invalid_attrs %{
+      area: nil,
+      class: nil,
+      distribution_date: nil,
+      judge: nil,
+      process_number: nil,
+      stock_price: nil,
+      subject: nil
+    }
 
     def detail_fixture(attrs \\ %{}) do
       {:ok, detail} =

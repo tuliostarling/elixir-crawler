@@ -13,6 +13,8 @@ defmodule CrawlerChallenge.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  import Ecto.Changeset
+  import Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
@@ -26,10 +28,10 @@ defmodule CrawlerChallenge.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CrawlerChallenge.Repo)
+    :ok = Sandbox.checkout(CrawlerChallenge.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CrawlerChallenge.Repo, {:shared, self()})
+      Sandbox.mode(CrawlerChallenge.Repo, {:shared, self()})
     end
 
     :ok
@@ -44,7 +46,7 @@ defmodule CrawlerChallenge.DataCase do
 
   """
   def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Changeset.traverse_errors(changeset, fn {message, opts} ->
       Enum.reduce(opts, message, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)

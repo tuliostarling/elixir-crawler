@@ -11,4 +11,4 @@ config :crawler_challenge, CrawlerChallengeWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-import_config "db/#{Mix.env}.secret.exs"
+import_config "db/#{Mix.env()}.secret.exs"

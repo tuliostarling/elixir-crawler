@@ -7,7 +7,11 @@ defmodule CrawlerChallenge.PartiesTest do
     alias CrawlerChallenge.Parties.Partie
 
     @valid_attrs %{lawyer: "some lawyer", name: "some name", partie: "some partie"}
-    @update_attrs %{lawyer: "some updated lawyer", name: "some updated name", partie: "some updated partie"}
+    @update_attrs %{
+      lawyer: "some updated lawyer",
+      name: "some updated name",
+      partie: "some updated partie"
+    }
     @invalid_attrs %{lawyer: nil, name: nil, partie: nil}
 
     def partie_fixture(attrs \\ %{}) do

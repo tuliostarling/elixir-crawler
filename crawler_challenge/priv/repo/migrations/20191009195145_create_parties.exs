@@ -10,6 +10,5 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateParties do
 
       timestamps()
     end
-
   end
 end

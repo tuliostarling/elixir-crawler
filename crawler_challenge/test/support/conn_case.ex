@@ -14,6 +14,9 @@ defmodule CrawlerChallengeWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  use Phoenix.ConnTest
+
+  import Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
@@ -27,12 +30,12 @@ defmodule CrawlerChallengeWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CrawlerChallenge.Repo)
+    :ok = Sandbox.checkout(CrawlerChallenge.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CrawlerChallenge.Repo, {:shared, self()})
+      Sandbox.mode(CrawlerChallenge.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: ConnTest.build_conn()}
   end
 end

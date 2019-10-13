@@ -10,7 +10,8 @@ defmodule CrawlerChallengeWeb.ProcessController do
   end
 
   def set_process(conn, _params) do
-    process = Processes.get_last_process_and_preload([:details, :movements, :parties, :court])
+    process = Processes.get_last_process_and_preload(
+      [:details, :movements, :parties, :court])
 
     case process do
       nil -> assign(conn, :process, nil)

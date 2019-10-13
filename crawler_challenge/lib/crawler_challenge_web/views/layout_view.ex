@@ -3,5 +3,5 @@ defmodule CrawlerChallengeWeb.LayoutView do
 
   alias CrawlerChallenge.Courts
 
-  def show_courts(), do: Courts.list_courts
+  def show_courts, do: Courts.list_courts()
 end

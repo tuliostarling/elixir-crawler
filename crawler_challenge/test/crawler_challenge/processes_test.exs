@@ -6,9 +6,16 @@ defmodule CrawlerChallenge.ProcessesTest do
   describe "processes" do
     alias CrawlerChallenge.Processes.Process
 
-    @valid_attrs %{process_number: 42}
-    @update_attrs %{process_number: 43}
-    @invalid_attrs %{process_number: nil}
+    # @valid_attrs %{process_number: 42}
+    # @update_attrs %{process_number: 43}
+    # @invalid_attrs %{process_number: nil}
+
+    # @valid_attrs params_for(:process)
+    # @update_attrs params_for(:process, process_number: "0717561-98.2019.8.02.0001")
+    # @invalid_attrs %{process_number: ""}
+    @valid_attrs %{court_id: 1, process_number: "0000575-40.2014.8.02.0081"}
+    @update_attrs %{process_number: "0717561-98.2019.8.02.0001"}
+    @invalid_attrs %{process_number: ""}
 
     def process_fixture(attrs \\ %{}) do
       {:ok, process} =
@@ -31,7 +38,7 @@ defmodule CrawlerChallenge.ProcessesTest do
 
     test "create_process/1 with valid data creates a process" do
       assert {:ok, %Process{} = process} = Processes.create_process(@valid_attrs)
-      assert process.process_number == 42
+      assert process.process_number == "0000575-40.2014.8.02.0081"
     end
 
     test "create_process/1 with invalid data returns error changeset" do
@@ -40,13 +47,15 @@ defmodule CrawlerChallenge.ProcessesTest do
 
     test "update_process/2 with valid data updates the process" do
       process = process_fixture()
-      assert {:ok, %Process{} = process} = Processes.update_process(process, @update_attrs)
-      assert process.process_number == 43
+      assert {:ok, %Process{} = process} =
+        Processes.update_process(process, @update_attrs)
+      assert process.process_number == "0717561-98.2019.8.02.0001"
     end
 
     test "update_process/2 with invalid data returns error changeset" do
       process = process_fixture()
-      assert {:error, %Ecto.Changeset{}} = Processes.update_process(process, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} =
+        Processes.update_process(process, @invalid_attrs)
       assert process == Processes.get_process!(process.id)
     end
 

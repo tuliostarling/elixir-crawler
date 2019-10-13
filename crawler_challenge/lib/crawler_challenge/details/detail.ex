@@ -8,10 +8,12 @@ defmodule CrawlerChallenge.Details.Detail do
   schema "details" do
     field(:area, :string)
     field(:class, :string)
+    field(:costs, :string)
     field(:control, :string)
     field(:distribution_date, :string)
     field(:judge, :string)
     field(:other_subject, :string)
+    field(:other_numbers, :string)
     field(:process_number)
     field(:stock_price, :string)
     field(:subject, :string)
@@ -21,8 +23,17 @@ defmodule CrawlerChallenge.Details.Detail do
     timestamps()
   end
 
-  @optional_files ~w(control other_subject)a
-  @required_fields ~w(process_number area class distribution_date judge stock_price subject process_id)a
+  @optional_files ~w(costs control other_subject other_numbers)a
+  @required_fields ~w(
+    process_number
+    area
+    class
+    distribution_date
+    judge
+    stock_price
+    subject
+    process_id
+  )a
 
   @doc false
   def changeset(detail, attrs) do

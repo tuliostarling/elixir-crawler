@@ -12,7 +12,7 @@ use Mix.Config
 config :crawler_challenge, CrawlerChallengeWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
   app_env: "${ENVIRONMENT_FULL}",
   secret_key_base: "${SECRET_KEY_BASE}",
   server: true

@@ -7,6 +7,5 @@ defmodule CrawlerChallenge.Repo.Migrations.CreateProcesses do
 
       timestamps()
     end
-
   end
 end

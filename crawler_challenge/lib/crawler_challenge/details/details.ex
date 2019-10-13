@@ -62,7 +62,8 @@ defmodule CrawlerChallenge.Details do
     |> Multi.run(:detail, fn _repo, %{process: process} ->
       detail_params = Map.merge(attrs, %{"process_id" => process.id})
 
-      Detail.changeset(%Detail{}, detail_params)
+      %Detail{}
+      |> Detail.changeset(detail_params)
       |> Repo.insert()
     end)
   end

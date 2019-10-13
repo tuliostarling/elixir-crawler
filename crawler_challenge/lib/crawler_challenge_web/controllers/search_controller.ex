@@ -23,9 +23,13 @@ defmodule CrawlerChallengeWeb.SearchController do
     with {:ok, show_url} <- Searches.return_show_url(process_n),
          {:ok, body} <- Searches.get_html_body(show_url),
          {:ok, crawled_data} <- Searches.get_crawled_data(body),
-         {:ok, %{process: process}} <- Processes.insert_all_data(process_n, court, crawled_data) do
+         {:ok, %{process: process}} <-
+           Processes.insert_all_data(process_n, court, crawled_data) do
       process =
-        Processes.get_process_by_id_and_preload(process, [:details, :movements, :parties, :court])
+        Processes.get_process_by_id_and_preload(
+          process,
+          [:details, :movements, :parties, :court]
+        )
 
       conn
       |> put_status(:ok)

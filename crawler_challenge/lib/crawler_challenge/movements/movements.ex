@@ -64,7 +64,8 @@ defmodule CrawlerChallenge.Movements do
     |> Multi.run(:movement, fn _repo, %{process: process} ->
       movement_params =
         Enum.map(attrs, fn movement ->
-          Map.put(movement, :inserted_at, Timex.now())
+          movement
+          |> Map.put(:inserted_at, Timex.now())
           |> Map.put(:updated_at, Timex.now())
           |> Map.merge(%{"process_id" => process.id})
         end)

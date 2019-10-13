@@ -46,9 +46,9 @@ defmodule CrawlerChallenge.MixProject do
       {:react_phoenix, "~> 1.0.0"},
       {:httpoison, "~> 1.6"},
       {:poison, "~> 4.0"},
-      {:faker, "~> 0.12.0"},
-      {:credo, "~> 1.1"},
-      {:ex_machina, "~> 2.3"},
+      {:faker, "~> 0.12.0", only: [:dev, :test]},
+      {:credo, "~> 1.1", only: [:dev, :test]},
+      {:ex_machina, "~> 2.3", only: [:dev, :test]},
       {:floki, "~> 0.23.0"},
       {:timex, "~> 3.6"}
     ]
