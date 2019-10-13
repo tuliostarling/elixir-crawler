@@ -3,7 +3,7 @@ defmodule CrawlerChallenge.Repo.Migrations.AddProcessIdFkToDetails do
 
   def change do
     alter table(:details) do
-      add :process_id, references(:processes)
+      add :process_id, references(:processes, on_delete: :delete_all)
     end
 
     create index(:details, [:process_id])

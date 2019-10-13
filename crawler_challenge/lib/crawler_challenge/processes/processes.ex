@@ -3,8 +3,10 @@ defmodule CrawlerChallenge.Processes do
   The Processes context.
   """
 
+  use Timex
+
   import Ecto.Query, warn: false
-  alias CrawlerChallenge.Courts
+  alias CrawlerChallenge.{Courts, Details, Movements, Parties}
   alias CrawlerChallenge.Repo
 
   alias CrawlerChallenge.Processes.Process
@@ -40,9 +42,34 @@ defmodule CrawlerChallenge.Processes do
   """
   def get_process!(id), do: Repo.get!(Process, id)
 
+  def get_process_by_number(number), do: Repo.get_by(Process, process_number: number)
+
   def get_process_by_id_and_preload(%{id: id}, associations) do
     Repo.get!(Process, id)
     |> Repo.preload(associations)
+  end
+
+  def validate_date(process) do
+    case process do
+      nil -> {:invalid, nil}
+      data -> check_expiration(data)
+    end
+  end
+
+  def check_expiration(%{inserted_at: date} = data) do
+    %{until: until} = Interval.new(from: date, until: [hours: 24])
+    {:ok, date_time} = DateTime.from_naive(until, "Etc/UTC")
+
+    result = Timex.diff(date_time, DateTime.utc_now(), :hours)
+
+    case result > 0 do
+      true ->
+        {:valid, data |> Repo.preload([:details, :movements, :parties, :court])}
+
+      false ->
+        {:ok, _result} = delete_process(data)
+        {:invalid, nil}
+    end
   end
 
   def get_last_process_and_preload(associations) do
@@ -68,12 +95,20 @@ defmodule CrawlerChallenge.Processes do
     |> Repo.insert()
   end
 
-  def insert_process_by_multi(process, court) do
+  def insert_all_data(process, court, crawled_data) do
     %{id: court_id} = Courts.get_court_by_name(court)
     process_params = %{"process_number" => process, "court_id" => court_id}
 
     Multi.new()
     |> Multi.insert(:process, Process.changeset(%Process{}, process_params))
+    |> Movements.insert_movement_by_multi(crawled_data[:list_movements])
+    |> Parties.insert_parties_by_multi(crawled_data[:list_parties])
+    |> Details.insert_details_by_multi(crawled_data[:list_details])
+    |> Repo.transaction()
+    |> case do
+      {:ok, result} -> {:ok, result}
+      {:error, _module, reason} -> {:error, reason}
+    end
   end
 
   @doc """
