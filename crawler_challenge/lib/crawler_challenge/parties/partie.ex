@@ -16,13 +16,13 @@ defmodule CrawlerChallenge.Parties.Partie do
     timestamps()
   end
 
-  @optional_fields ~w(name partie position person_name_position)a
-  @required_fields ~w(process_id)a
+  @required_fields ~w(name partie process_id)a
+  @optional_fields ~w(position person_name_position)a
 
   @doc false
   def changeset(partie, attrs) do
     partie
-    |> cast(attrs, @optional_fields ++ @required_fields)
+    |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
   end
 end

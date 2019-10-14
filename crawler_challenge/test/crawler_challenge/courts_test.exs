@@ -6,8 +6,8 @@ defmodule CrawlerChallenge.CourtsTest do
   describe "courts" do
     alias CrawlerChallenge.Courts.Court
 
-    @valid_attrs %{name: "some name"}
-    @update_attrs %{name: "some updated name"}
+    @valid_attrs %{name: "some name", initials: "some initials"}
+    @update_attrs %{name: "some updated name", initials: "some initials"}
     @invalid_attrs %{name: nil}
 
     def court_fixture(attrs \\ %{}) do

@@ -4,9 +4,9 @@ defmodule CrawlerChallenge.ProcessFactory do
   defmacro __using__(_opts) do
     quote do
       def process_factory do
-        %CrawlerChallenge.Process.Proces{
+        %CrawlerChallenge.Processes.Process{
           process_number: "0000575-40.2014.8.02.0081",
-          court: build(:court)
+          court: build(:courts)
         }
       end
     end

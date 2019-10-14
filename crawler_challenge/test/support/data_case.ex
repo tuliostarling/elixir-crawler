@@ -23,7 +23,7 @@ defmodule CrawlerChallenge.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import CrawlerChallenge.DataCase
+      import CrawlerChallenge.{DataCase, Factory}
     end
   end
 

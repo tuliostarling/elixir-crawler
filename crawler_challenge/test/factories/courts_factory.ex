@@ -8,7 +8,7 @@ defmodule CrawlerChallenge.CourtsFactory do
       def courts_factory do
         %CrawlerChallenge.Courts.Court{
           name: Name.first_name(),
-          initials: Lorem.characters(2..4)
+          initials: Name.name()
         }
       end
     end

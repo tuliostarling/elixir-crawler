@@ -7,14 +7,14 @@ defmodule CrawlerChallenge.DetailsFactory do
       def details_factory do
         %CrawlerChallenge.Details.Detail{
           process_number: "0000575-40.2014.8.02.0081",
-          class: Lorem.words(),
-          costs: Lorem.words(),
-          control: Lorem.words(),
-          area: Lorem.word(),
-          subject: Lorem.sentence(),
-          other_subject: Lorem.words(),
-          other_numbers: Lorem.words(),
-          distribution_data: "14/10/2019",
+          class: Name.name(),
+          costs: Name.name(),
+          control: Name.name(),
+          area: Name.name(),
+          subject: Name.name(),
+          other_subject: Name.name(),
+          other_numbers: Name.name(),
+          distribution_date: "14/10/2019",
           judge: Name.name(),
           stock_price: "1.100,00",
           process: build(:process)

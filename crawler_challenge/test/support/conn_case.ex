@@ -14,15 +14,15 @@ defmodule CrawlerChallengeWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
-  use Phoenix.ConnTest
-
   alias Ecto.Adapters.SQL.Sandbox
+  alias Phoenix.ConnTest
 
   using do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias CrawlerChallengeWeb.Router.Helpers, as: Routes
+      import CrawlerChallenge.Factory
 
       # The default endpoint for testing
       @endpoint CrawlerChallengeWeb.Endpoint

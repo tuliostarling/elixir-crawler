@@ -14,7 +14,7 @@ defmodule CrawlerChallenge.Details.Detail do
     field(:judge, :string)
     field(:other_subject, :string)
     field(:other_numbers, :string)
-    field(:process_number)
+    field(:process_number, :string)
     field(:stock_price, :string)
     field(:subject, :string)
 
@@ -23,13 +23,12 @@ defmodule CrawlerChallenge.Details.Detail do
     timestamps()
   end
 
-  @optional_files ~w(costs control other_subject other_numbers)a
+  @optional_files ~w(costs control judge other_subject other_numbers)a
   @required_fields ~w(
     process_number
     area
     class
     distribution_date
-    judge
     stock_price
     subject
     process_id
