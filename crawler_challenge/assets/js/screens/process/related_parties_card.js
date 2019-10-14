@@ -1,15 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
-export const RelatedPartiesCard = props => {
+export const RelatedPartiesCard = (props) => {
   const { parties } = props;
   return (
     <div className="card">
       <div className="card-content related_content">
         <span className="card-title">Partes envolvidas</span>
 
-        {parties.map(partie => (
+        {parties.map((partie) => (
           <Fragment key={partie.id}>
             <div className="related_wrapper">
               <p className="related_wrapper__name">{partie.name}</p>
@@ -36,12 +36,12 @@ RelatedPartiesCard.propTypes = {
       name: PropType.string.isRequired,
       partie: PropType.string.isRequired,
       person_name_position: PropType.string,
-      position: PropType.string
-    })
-  ).isRequired
+      position: PropType.string,
+    }),
+  ).isRequired,
 };
 
 RelatedPartiesCard.defaultProps = {
-  person_name_position: "",
-  position: ""
+  person_name_position: '',
+  position: '',
 };

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
-export const MovementCard = props => {
+export const MovementCard = (props) => {
   const { movements } = props;
 
   return (
@@ -10,7 +10,7 @@ export const MovementCard = props => {
       <div className="card-content movements_content">
         <span className="card-title">Movimentações</span>
 
-        {movements.map(movement => (
+        {movements.map((movement) => (
           <div className="movement_wrapper" key={movement.id}>
             <p className="movement_wrapper__date">{movement.movement_date}</p>
             <span className="movement_wrapper__move">{movement.movement}</span>
@@ -27,7 +27,7 @@ MovementCard.propTypes = {
       id: PropType.number.isRequired,
       process_id: PropType.number.isRequired,
       movement: PropType.string.isRequired,
-      movement_date: PropType.string.isRequired
-    })
-  ).isRequired
+      movement_date: PropType.string.isRequired,
+    }),
+  ).isRequired,
 };

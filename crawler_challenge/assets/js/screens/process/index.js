@@ -6,57 +6,51 @@ import { MovementCard } from "./movement_card";
 import { DetailsCard } from "./details_card";
 import { RelatedPartiesCard } from "./related_parties_card";
 import { EmptyPage } from "./empty";
+import ProcessContext from "../Context";
 
 export default class ProcessScreen extends Component {
-  constructor(props) {
-    super(props);
+  static contextType = ProcessContext;
 
-    const { process } = this.props;
-
-    console.log(process)
-
-    this.state = {
-      process: process
-    };
-  }
-
-  render_card(process) {
+  render_card(context) {
     return (
       <Fragment>
         <div className="wrapper__card_header">
           <h4 className="wrapper__card_header___title">
-            Processo n. {process.process_number} do TJAL
+            Processo n. {context.state.process.process_number} do TJAL
           </h4>
           <span className="wrapper__card_header___sub_title">
-            Distribuído em 09/11/2017
+            Distribuído em 09/11/2017 troca isso aq
           </span>
         </div>
 
         <div className="row">
           <div className="col s12 m8 l8 wrapper__movement_card">
-            <MovementCard movements={process.movements} />
+            <MovementCard movements={context.state.process.movements} />
           </div>
           <div className="col s12 m4 l4">
-            <DetailsCard details={process.details} />
-            <RelatedPartiesCard parties={process.parties} />
+            <DetailsCard details={context.state.process.details} />
+            <RelatedPartiesCard parties={context.state.process.parties} />
           </div>
         </div>
       </Fragment>
     );
   }
 
-  render_empty_or_card(process) {
-    if (process != null) {
-      return this.render_card(process);
+  render_empty_or_card() {
+    const { context } = this;
+    if (context.state.process != undefined) {
+      return this.render_card(context);
     }
 
     return <EmptyPage />;
   }
 
   render() {
-    const { process } = this.props;
-
-    return <div className="wrapper">{this.render_empty_or_card(process)}</div>;
+    return (
+      <Fragment>
+        <div className="wrapper">{this.render_empty_or_card()}</div>
+      </Fragment>
+    );
   }
 }
 
@@ -100,5 +94,9 @@ ProcessScreen.propTypes = {
         })
       ).isRequired
     })
-  ).isRequired
+  )
+};
+
+ProcessScreen.defaultProps = {
+  process: null
 };

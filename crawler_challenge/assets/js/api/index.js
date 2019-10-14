@@ -2,11 +2,11 @@ const request = async (path, method, params = {}) => {
   const response = await fetch(path, {
     method,
     headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     },
-    credentials: "same-origin",
-    ...params
+    credentials: 'same-origin',
+    ...params,
   });
 
   if (!response.ok) {
@@ -21,18 +21,18 @@ const request = async (path, method, params = {}) => {
 
 export default {
   get(path) {
-    return request(path, "GET");
+    return request(path, 'GET');
   },
 
   post(path, body) {
-    return request(path, "POST", { body: JSON.stringify(body) });
+    return request(path, 'POST', { body: JSON.stringify(body) });
   },
 
   put(path, body) {
-    return request(path, "PATCH", { body: JSON.stringify(body) });
+    return request(path, 'PATCH', { body: JSON.stringify(body) });
   },
 
   delete(path) {
-    return request(path, "DELETE");
-  }
+    return request(path, 'DELETE');
+  },
 };

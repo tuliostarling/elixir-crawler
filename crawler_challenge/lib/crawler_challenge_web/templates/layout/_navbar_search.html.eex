@@ -1,6 +1,5 @@
-<%= 
-  ReactPhoenix.ClientSide.react_component("Components.NavbarSearch",
-  search_path: Routes.search_path(@conn, :index),
+<%# <%= 
+  ReactPhoenix.ClientSide.react_component("Components.ProcessProvider",
   courts: show_courts()
   )
 %>

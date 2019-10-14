@@ -2,7 +2,7 @@ defmodule CrawlerChallengeWeb.SearchController do
   use CrawlerChallengeWeb, :controller
 
   alias CrawlerChallenge.{Processes, Searches}
-
+  alias CrawlerChallenge.Repo
   alias CrawlerChallengeWeb.ProcessView
 
   def index(conn, %{"court" => court, "process_n" => process_n}) do
@@ -15,7 +15,7 @@ defmodule CrawlerChallengeWeb.SearchController do
       {:valid, process} ->
         conn
         |> put_status(:ok)
-        |> render(ProcessView, :index, %{process: process})
+        |> json(%{data: process})
     end
   end
 
@@ -33,7 +33,7 @@ defmodule CrawlerChallengeWeb.SearchController do
 
       conn
       |> put_status(:ok)
-      |> render(ProcessView, :index, %{process: process})
+      |> json(%{data: process})
     else
       {:error, reason} ->
         {:error, reason}

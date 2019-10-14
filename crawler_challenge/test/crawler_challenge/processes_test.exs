@@ -47,15 +47,13 @@ defmodule CrawlerChallenge.ProcessesTest do
 
     test "update_process/2 with valid data updates the process" do
       process = process_fixture()
-      assert {:ok, %Process{} = process} =
-        Processes.update_process(process, @update_attrs)
+      assert {:ok, %Process{} = process} = Processes.update_process(process, @update_attrs)
       assert process.process_number == "0717561-98.2019.8.02.0001"
     end
 
     test "update_process/2 with invalid data returns error changeset" do
       process = process_fixture()
-      assert {:error, %Ecto.Changeset{}} =
-        Processes.update_process(process, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Processes.update_process(process, @invalid_attrs)
       assert process == Processes.get_process!(process.id)
     end
 

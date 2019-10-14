@@ -1,20 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
-export const DetailsList = props => {
+export const DetailsList = (props) => {
   const { details } = props;
 
-  const detail_list = Object.entries(details).map(([key, value]) => {
-    return (
-      <div className="detail_wrapper" key={key}>
-        <p className="detail_wrapper__value">
-          {value == null ? null : `${key}: `}
-          {value == null ? null : value.toString()}
-        </p>
-      </div>
-    );
-  });
+  const detail_list = Object.entries(details).map(([key, value]) => (
+    <div className="detail_wrapper" key={key}>
+      <p className="detail_wrapper__value">
+        {value == null ? null : `${key}: `}
+        {value == null ? null : value.toString()}
+      </p>
+    </div>
+  ));
 
   return detail_list;
 };
@@ -32,7 +30,7 @@ DetailsList.propTypes = {
       other_subject: PropType.string,
       process_number: PropType.string.isRequired,
       stock_price: PropType.string.isRequired,
-      subject: PropType.string.isRequired
-    })
-  ).isRequired
+      subject: PropType.string.isRequired,
+    }),
+  ).isRequired,
 };

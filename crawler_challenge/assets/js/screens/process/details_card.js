@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
-import { DetailsList } from "./details_list";
+import { DetailsList } from './details_list';
 
-export const DetailsCard = props => {
+export const DetailsCard = (props) => {
   const { details } = props;
 
   return (
     <div className="card">
       <div className="card-content details_content">
         <span className="card-title">Detalhes do processo</span>
-        {details.map(detail => (
+        {details.map((detail) => (
           <DetailsList key={detail.id} details={detail} />
         ))}
       </div>
@@ -32,7 +32,7 @@ DetailsCard.propTypes = {
       other_subject: PropType.string,
       process_number: PropType.string.isRequired,
       stock_price: PropType.string.isRequired,
-      subject: PropType.string.isRequired
-    })
-  ).isRequired
+      subject: PropType.string.isRequired,
+    }),
+  ).isRequired,
 };

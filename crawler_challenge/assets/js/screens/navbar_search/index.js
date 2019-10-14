@@ -1,89 +1,26 @@
-import React, { Component } from "react";
-
-import PropType from "prop-types";
+import React, { Component, Fragment } from "react";
 
 import "babel-polyfill";
 
-import { Button, SelectInput, TextInput } from "../../components";
-
-import Api from "../../api"
+import { SearchForm } from "./form";
+import ProcessContext from "../Context";
 
 export default class NavbarSearch extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      search_attrs: {
-        court: "",
-        process_n: ""
-      }
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  async handleSubmit() {
-    const { search_path } = this.props;
-    const { search_attrs } = this.state;
-
-    try {
-      const result = await Api.post(search_path, search_attrs);
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
-  handleChange(input_name, evt) {
-    let { search_attrs } = this.state;
-    search_attrs[input_name] = evt.target.value;
-    this.setState({ search_attrs });
-  }
+  static contextType = ProcessContext;
 
   render() {
-    const { courts } = this.props
+    const { context } = this;
 
     return (
-      <header>
-        <nav>
-          <div className="nav-wrapper">
-            <div className="input-field col s12">
-              <SelectInput
-                class_name="select_court_input"
-                options={courts}
-                onChange={evt => this.handleChange("court", evt)}
-              />
+      <Fragment>
+        <header>
+          <nav>
+            <div className="nav-wrapper">
+              <SearchForm courts={context.state.courts} handleChange={context.handleChange} handleSubmit={context.handleSubmit} />
             </div>
-            <div className="input-field col s12">
-              <TextInput
-                placeholder="Número do processo"
-                id="first_name"
-                type="text"
-                class_name="validate text_input"
-                onChange={evt => this.handleChange("process_n", evt)}
-              />
-            </div>
-
-            <Button
-              class_name="btn waves-effect waves-light btn nav-wrapper__btn"
-              type="submit"
-              name="action"
-              onClick={() => this.handleSubmit()}
-            >
-              Buscar
-            </Button>
-          </div>
-        </nav>
-      </header>
+          </nav>
+        </header>
+      </Fragment>
     );
   }
 }
-
-NavbarSearch.propTypes = {
-  courts: PropType.arrayOf(
-    PropType.shape({
-      id: PropType.number.isRequired,
-      name: PropType.string.isRequired,
-      initials: PropType.string.isRequired
-    })
-  ).isRequired
-};

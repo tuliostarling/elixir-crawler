@@ -1,2 +1,5 @@
-<%= ReactPhoenix.ClientSide.react_component("Components.ProcessScreen",
-  process: @process) %>
+<%= 
+  ReactPhoenix.ClientSide.react_component("Components.ProcessProvider",
+  courts: show_courts()
+  )
+%>

@@ -16,7 +16,7 @@ defmodule CrawlerChallengeWeb.ConnCase do
   use ExUnit.CaseTemplate
   use Phoenix.ConnTest
 
-  import Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do

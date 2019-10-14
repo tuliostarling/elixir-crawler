@@ -41,16 +41,14 @@ defmodule CrawlerChallenge.MovementsTest do
 
     test "update_movement/2 with valid data updates the movement" do
       movement = movement_fixture()
-      assert {:ok, %Movement{} = movement} =
-        Movements.update_movement(movement, @update_attrs)
+      assert {:ok, %Movement{} = movement} = Movements.update_movement(movement, @update_attrs)
       assert movement.movement == "some updated movement"
       assert movement.movement_date == ~N[2011-05-18 15:01:01]
     end
 
     test "update_movement/2 with invalid data returns error changeset" do
       movement = movement_fixture()
-      assert {:error, %Ecto.Changeset{}} =
-        Movements.update_movement(movement, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Movements.update_movement(movement, @invalid_attrs)
       assert movement == Movements.get_movement!(movement.id)
     end
 
