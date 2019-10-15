@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 import { Button, SelectInput, TextInput } from '../../components';
 
 export const SearchForm = (props) => {
-  const { courts, handleChange, handleSubmit } = props;
+  const { courts, handleChange, handleSubmit, loading } = props;
 
   return (
     <Fragment>
@@ -31,8 +31,9 @@ export const SearchForm = (props) => {
         type="submit"
         name="action"
         onClick={() => handleSubmit()}
+        loading={loading}
       >
-        Buscar
+        {loading == false ? 'Buscar' : 'Aguarde...'}
       </Button>
     </Fragment>
   );
@@ -48,4 +49,5 @@ SearchForm.propTypes = {
   ).isRequired,
   handleChange: PropType.func.isRequired,
   handleSubmit: PropType.func.isRequired,
+  loading: PropType.bool.isRequired,
 };

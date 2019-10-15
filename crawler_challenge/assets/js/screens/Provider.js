@@ -10,6 +10,8 @@ export default class ProcessProvider extends Component {
   state = {
     ...this.props,
     process: null,
+    loading: false,
+    error_message: null,
 
     search_attrs: {
       court: '',
@@ -19,12 +21,17 @@ export default class ProcessProvider extends Component {
 
   handleSubmit = async () => {
     const { search_attrs } = this.state;
+    this.setState({ loading: true });
 
     try {
       const result = await Api.post('/search', search_attrs);
-      this.setState({ process: result.data })
+      this.setState({
+        process: result.data,
+        loading: false,
+        error_message: null
+      });
     } catch (error) {
-      console.log(error);
+      this.setState({ loading: false, error_message: error.message });
     }
   }
 

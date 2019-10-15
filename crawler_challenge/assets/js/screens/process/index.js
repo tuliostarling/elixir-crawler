@@ -41,11 +41,15 @@ export default class ProcessScreen extends Component {
 
   render_empty_or_card() {
     const { context } = this;
-    if (context.state.process != undefined) {
+
+    if (
+      context.state.process != undefined &&
+      context.state.error_message == null
+    ) {
       return this.render_card(context);
     }
 
-    return <EmptyPage />;
+    return <EmptyPage message={context.state.error_message} />;
   }
 
   render() {

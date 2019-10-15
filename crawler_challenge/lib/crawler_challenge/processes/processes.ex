@@ -57,6 +57,15 @@ defmodule CrawlerChallenge.Processes do
     end
   end
 
+  def valid_process_number(""), do: {:error, :invalid_process_number}
+
+  def valid_process_number(process_n) do
+    case String.match?(process_n, ~r/[a-zA-Z]/) do
+      true -> {:error, :invalid_process_number}
+      false -> {:ok, :valid_process_number}
+    end
+  end
+
   def check_expiration(%{inserted_at: date} = data) do
     %{until: until} = Interval.new(from: date, until: [hours: 24])
     {:ok, date_time} = DateTime.from_naive(until, "Etc/UTC")
@@ -100,7 +109,7 @@ defmodule CrawlerChallenge.Processes do
   end
 
   def insert_all_data(process, court, crawled_data) do
-    %{id: court_id} = Courts.get_court_by_name(court)
+    %{id: court_id} = Courts.get_court_by_name(court.name)
     process_params = %{"process_number" => process, "court_id" => court_id}
 
     Multi.new()

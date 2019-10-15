@@ -1,16 +1,26 @@
 defmodule CrawlerChallengeWeb.SearchController do
   use CrawlerChallengeWeb, :controller
 
-  alias CrawlerChallenge.{Processes, Searches}
-  alias CrawlerChallenge.Repo
-  alias CrawlerChallengeWeb.ProcessView
+  alias CrawlerChallenge.{Courts, Processes, Searches}
+  alias CrawlerChallenge.Courts.Court
 
   def index(conn, %{"court" => court, "process_n" => process_n}) do
     process_data = Processes.get_process_by_number(process_n)
 
-    case Processes.validate_date(process_data) do
-      {:invalid, nil} ->
-        do_crawl(conn, court, process_n)
+    with %Court{} = court <- Courts.get_court_by_name(court),
+         {:ok, :valid_process_number} <- Processes.valid_process_number(process_n),
+         {:invalid, nil} <- Processes.validate_date(process_data) do
+      do_crawl(conn, court, process_n)
+    else
+      {:error, :invalid_process_number} ->
+        conn
+        |> put_status(401)
+        |> json(%{message: "Número do processo inválido"})
+
+      nil ->
+        conn
+        |> put_status(401)
+        |> json(%{message: "Preencha os dados do Campo 'Tribunal'"})
 
       {:valid, process} ->
         conn
@@ -36,7 +46,9 @@ defmodule CrawlerChallengeWeb.SearchController do
       |> json(%{data: process})
     else
       {:error, reason} ->
-        {:error, reason}
+        conn
+        |> put_status(401)
+        |> json(%{error: reason})
     end
   end
 end

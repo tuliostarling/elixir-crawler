@@ -1,6 +1,6 @@
 defmodule CrawlerChallenge.DetailsFactory do
   use ExMachina.Ecto, repo: CrawlerChallenge.Repo
-  alias Faker.{Lorem, Name}
+  alias Faker.Name
 
   defmacro __using__(_opts) do
     quote do

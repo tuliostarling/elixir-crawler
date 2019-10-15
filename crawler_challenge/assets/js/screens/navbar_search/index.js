@@ -16,7 +16,12 @@ export default class NavbarSearch extends Component {
         <header>
           <nav>
             <div className="nav-wrapper">
-              <SearchForm courts={context.state.courts} handleChange={context.handleChange} handleSubmit={context.handleSubmit} />
+              <SearchForm
+                courts={context.state.courts}
+                handleChange={context.handleChange}
+                handleSubmit={context.handleSubmit}
+                loading={context.state.loading}
+              />
             </div>
           </nav>
         </header>

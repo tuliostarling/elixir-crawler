@@ -13,6 +13,7 @@ const TextInput = (props) => {
       type={type}
       id={id}
       placeholder={placeholder}
+      maxLength="25"
       {...rest}
     />
   );
