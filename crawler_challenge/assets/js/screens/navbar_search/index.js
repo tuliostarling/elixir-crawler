@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 
-import "babel-polyfill";
+import 'babel-polyfill';
 
-import { SearchForm } from "./form";
-import ProcessContext from "../Context";
+import { SearchForm } from './form';
+import ProcessContext from '../Context';
 
 export default class NavbarSearch extends Component {
   static contextType = ProcessContext;

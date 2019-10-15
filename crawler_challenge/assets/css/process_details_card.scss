@@ -11,9 +11,10 @@
   .detail_wrapper {
     margin-bottom: 15px;
 
-   &__value {
+    &__value {
     font-size: 12px;
     color: $color-silver-chalice;
+    margin-bottom: 15px !important;
    }
   }
 }

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
 const SelectInput = props => {
   const { class_name, options, ...rest } = props;

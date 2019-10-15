@@ -11,7 +11,7 @@ defmodule CrawlerChallenge.ScraperTest do
 
       {:ok, body} = Searches.get_html_body(location)
 
-      result =
+      _result =
         body
         |> Parser.parse()
         |> Scraper.scrapy()

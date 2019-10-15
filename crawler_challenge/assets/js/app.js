@@ -1,6 +1,7 @@
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
+import M from 'materialize-css';
 import css from '../css/app.scss';
 
 // webpack automatically bundles all modules in your
@@ -13,7 +14,6 @@ import 'phoenix_html';
 import 'react-phoenix';
 
 import 'materialize-loader';
-import M from 'materialize-css';
 
 // Import local files
 //

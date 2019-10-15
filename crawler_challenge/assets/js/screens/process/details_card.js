@@ -26,13 +26,19 @@ DetailsCard.propTypes = {
       process_id: PropType.number.isRequired,
       area: PropType.string.isRequired,
       class: PropType.string.isRequired,
-      control: PropType.string.isRequired,
+      control: PropType.string,
       distribution_date: PropType.string.isRequired,
-      judge: PropType.string.isRequired,
+      judge: PropType.string,
       other_subject: PropType.string,
       process_number: PropType.string.isRequired,
       stock_price: PropType.string.isRequired,
       subject: PropType.string.isRequired,
     }),
   ).isRequired,
+};
+
+DetailsList.defaultProps = {
+  control: '',
+  judge: '',
+  other_subject: '',
 };

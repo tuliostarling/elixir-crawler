@@ -1,35 +1,38 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 
-import PropType from "prop-types";
+import PropType from 'prop-types';
 
-import { MovementCard } from "./movement_card";
-import { DetailsCard } from "./details_card";
-import { RelatedPartiesCard } from "./related_parties_card";
-import { EmptyPage } from "./empty";
-import ProcessContext from "../Context";
+import { MovementCard } from './movement_card';
+import { DetailsCard } from './details_card';
+import { RelatedPartiesCard } from './related_parties_card';
+import { EmptyPage } from './empty';
+import ProcessContext from '../Context';
 
 export default class ProcessScreen extends Component {
   static contextType = ProcessContext;
 
   render_card(context) {
+    const { state } = context;
+
     return (
       <Fragment>
         <div className="wrapper__card_header">
           <h4 className="wrapper__card_header___title">
-            Processo n. {context.state.process.process_number} do TJAL
+            Processo n. {state.process.process_number} do{' '}
+            {state.courts[0].initials}
           </h4>
           <span className="wrapper__card_header___sub_title">
-            Distribuído em 09/11/2017 troca isso aq
+            Distribuído em {state.process.details[0].distribution_date}
           </span>
         </div>
 
         <div className="row">
           <div className="col s12 m8 l8 wrapper__movement_card">
-            <MovementCard movements={context.state.process.movements} />
+            <MovementCard movements={state.process.movements} />
           </div>
           <div className="col s12 m4 l4">
-            <DetailsCard details={context.state.process.details} />
-            <RelatedPartiesCard parties={context.state.process.parties} />
+            <DetailsCard details={state.process.details} />
+            <RelatedPartiesCard parties={state.process.parties} />
           </div>
         </div>
       </Fragment>
@@ -73,7 +76,7 @@ ProcessScreen.propTypes = {
           process_number: PropType.string.isRequired,
           stock_price: PropType.string.isRequired,
           subject: PropType.string.isRequired
-        })
+        }),
       ).isRequired,
       movements: PropType.arrayOf(
         PropType.shape({
@@ -81,7 +84,7 @@ ProcessScreen.propTypes = {
           process_id: PropType.number.isRequired,
           movement: PropType.string.isRequired,
           movement_date: PropType.string.isRequired
-        })
+        }),
       ).isRequired,
       parties: PropType.arrayOf(
         PropType.shape({
@@ -91,12 +94,12 @@ ProcessScreen.propTypes = {
           partie: PropType.string.isRequired,
           person_name_position: PropType.string.isRequired,
           position: PropType.string.isRequired
-        })
-      ).isRequired
-    })
-  )
+        }),
+      ).isRequired,
+    }),
+  ),
 };
 
 ProcessScreen.defaultProps = {
-  process: null
+  process: null,
 };

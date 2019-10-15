@@ -1,5 +1,0 @@
-<%# <%= 
-  ReactPhoenix.ClientSide.react_component("Components.ProcessProvider",
-  courts: show_courts()
-  )
-%>

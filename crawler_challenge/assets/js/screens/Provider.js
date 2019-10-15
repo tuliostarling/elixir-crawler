@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import ProcessContext from "./Context";
+import React, { Component } from 'react';
+import ProcessContext from './Context';
 
-import NavbarSearch from "../screens/navbar_search"
-import ProcessScreen from "../screens/process"
+import NavbarSearch from '../screens/navbar_search'
+import ProcessScreen from '../screens/process'
 
-import Api from "../api";
+import Api from '../api';
 
 export default class ProcessProvider extends Component {
   state = {
@@ -12,8 +12,8 @@ export default class ProcessProvider extends Component {
     process: null,
 
     search_attrs: {
-      court: "",
-      process_n: ""
+      court: '',
+      process_n: ''
     }
   };
 
@@ -21,7 +21,7 @@ export default class ProcessProvider extends Component {
     const { search_attrs } = this.state;
 
     try {
-      const result = await Api.post("/search", search_attrs);
+      const result = await Api.post('/search', search_attrs);
       this.setState({ process: result.data })
     } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ export default class ProcessProvider extends Component {
         value={{
           state: this.state,
           handleSubmit: this.handleSubmit,
-          handleChange: this.handleChange
+          handleChange: this.handleChange,
         }}
       >
         <NavbarSearch />
