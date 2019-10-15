@@ -20,7 +20,7 @@ defmodule CrawlerChallengeWeb.SearchController do
       nil ->
         conn
         |> put_status(401)
-        |> json(%{message: "Preencha os dados do Campo 'Tribunal'"})
+        |> json(%{message: "Preencha os dados do form: Campo 'Tribunal'"})
 
       {:valid, process} ->
         conn
