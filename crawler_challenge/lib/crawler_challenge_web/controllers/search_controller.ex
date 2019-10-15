@@ -1,15 +1,13 @@
 defmodule CrawlerChallengeWeb.SearchController do
   use CrawlerChallengeWeb, :controller
 
-  alias CrawlerChallenge.{Courts, Processes, Searches}
+  alias CrawlerChallenge.{Courts, NebulexCache, Processes, Searches}
   alias CrawlerChallenge.Courts.Court
 
   def index(conn, %{"court" => court, "process_n" => process_n}) do
-    process_data = Processes.get_process_by_number(process_n)
-
     with %Court{} = court <- Courts.get_court_by_name(court),
          {:ok, :valid_process_number} <- Processes.valid_process_number(process_n),
-         {:invalid, nil} <- Processes.validate_date(process_data) do
+         {:invalid, nil} <- Processes.validate_date(process_n) do
       do_crawl(conn, court, process_n)
     else
       {:error, :invalid_process_number} ->
@@ -40,6 +38,8 @@ defmodule CrawlerChallengeWeb.SearchController do
           process,
           [:details, :movements, :parties, :court]
         )
+
+      NebulexCache.set_cache(process.process_number, process.id)
 
       conn
       |> put_status(:ok)
