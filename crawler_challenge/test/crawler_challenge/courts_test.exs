@@ -29,6 +29,11 @@ defmodule CrawlerChallenge.CourtsTest do
       assert Courts.get_court!(court.id) == court
     end
 
+    test "get_court_by_name/1 returns the court with given name" do
+      court = court_fixture()
+      assert Courts.get_court_by_name(court.name) == court
+    end
+
     test "create_court/1 with valid data creates a court" do
       assert {:ok, %Court{} = court} = Courts.create_court(@valid_attrs)
       assert court.name == "some name"

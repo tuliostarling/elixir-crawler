@@ -13,8 +13,8 @@ defmodule CrawlerChallenge.DataCase do
   """
 
   use ExUnit.CaseTemplate
-  import Ecto.Changeset
   alias Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Changeset
 
   using do
     quote do

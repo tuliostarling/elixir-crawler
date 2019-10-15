@@ -27,7 +27,7 @@ defmodule CrawlerChallenge.PartiesTest do
     test "create_partie/1 with valid data creates a partie" do
       valid_attrs = params_with_assocs(:parties)
       assert {:ok, %Partie{} = partie} = Parties.create_partie(valid_attrs)
-      
+
       inserted_partie = Parties.get_partie!(partie.id)
       assert partie.name == inserted_partie.name
       assert partie.partie == inserted_partie.partie
