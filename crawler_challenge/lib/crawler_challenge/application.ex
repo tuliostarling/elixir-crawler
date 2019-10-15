@@ -13,9 +13,10 @@ defmodule CrawlerChallenge.Application do
       # Start the Ecto repository
       CrawlerChallenge.Repo,
       # Start the endpoint when the application starts
-      CrawlerChallengeWeb.Endpoint
+      CrawlerChallengeWeb.Endpoint,
       # Starts a worker by calling: CrawlerChallenge.Worker.start_link(arg)
       # {CrawlerChallenge.Worker, arg},
+      {CrawlerChallenge.NebulexCache, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

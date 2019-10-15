@@ -6,7 +6,7 @@ defmodule CrawlerChallenge.Processes do
   use Timex
 
   import Ecto.Query, warn: false
-  alias CrawlerChallenge.{Courts, Details, Movements, Parties}
+  alias CrawlerChallenge.{Courts, Details, Movements, NebulexCache, Parties}
   alias CrawlerChallenge.Repo
 
   alias CrawlerChallenge.Processes.Process
@@ -50,13 +50,6 @@ defmodule CrawlerChallenge.Processes do
     |> Repo.preload(associations)
   end
 
-  def validate_date(process) do
-    case process do
-      nil -> {:invalid, nil}
-      data -> check_expiration(data)
-    end
-  end
-
   def valid_process_number(""), do: {:error, :invalid_process_number}
 
   def valid_process_number(process_n) do
@@ -66,19 +59,13 @@ defmodule CrawlerChallenge.Processes do
     end
   end
 
-  def check_expiration(%{inserted_at: date} = data) do
-    %{until: until} = Interval.new(from: date, until: [hours: 24])
-    {:ok, date_time} = DateTime.from_naive(until, "Etc/UTC")
-
-    result = Timex.diff(date_time, DateTime.utc_now(), :hours)
-
-    case result > 0 do
-      true ->
-        {:valid, Repo.preload(data, [:details, :movements, :parties, :court])}
-
-      false ->
-        {:ok, _result} = delete_process(data)
+  def validate_date(process) do
+    case NebulexCache.get_cache(process) do
+      {:error, :not_found} ->
         {:invalid, nil}
+      {:ok, data} ->
+        process = get_process!(data)
+        {:valid, Repo.preload(process, [:details, :movements, :parties, :court])}
     end
   end
 

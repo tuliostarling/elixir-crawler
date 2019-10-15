@@ -50,7 +50,8 @@ defmodule CrawlerChallenge.MixProject do
       {:credo, "~> 1.1", only: [:dev, :test]},
       {:ex_machina, "~> 2.3", only: [:dev, :test]},
       {:floki, "~> 0.23.0"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:nebulex, "~> 1.1"}
     ]
   end
 
