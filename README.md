@@ -8,6 +8,7 @@ First of all you need to clone this repo to any folder you want.
 # Config Native
 
 ### Requisites:
+
 > Elixir - 1.9.0
 > Erlang - 22.0
 > PostgreSQL - 11.4
@@ -56,25 +57,36 @@ Follow this link: [https://github.com/asdf-vm/asdf#setup](https://github.com/asd
 Then run:
 
     $ asdf install
- 
 
 ### Installing dependencies:
 
 To start your Phoenix server, follow the instructions:
 
 - Duplicate both **dev** and **test** configuration files from the **config/db** folder.
-`$ cp config/db/dev.secret.exs.example config/db/dev.secret.exs`
-`$ cp config/db/test.secret.exs.example config/db/test.secret.exs`
+
+```bash
+$ cp config/db/dev.secret.exs.example config/db/dev.secret.exs
+$ cp config/db/test.secret.exs.example config/db/test.secret.exs
+```
+
 - Set up correctly with your credentials.
 - Install dependencies with mix **deps.get**
-`$ mix deps.get`
+```bash
+$ mix deps.get
+```
 - Create and update your database with **mix ecto.setup**
-`$ mix ecto.setup`
+```bash
+$ mix ecto.setup
+```
 - Install Node.js (with nvm: https://github.com/creationix/Nvm#install-script)
 - Install yarn
-`$ npm install -g yarn`
+```bash
+$ npm install -g yarn
+```
 - Install Node.js dependencies with **cd assets && yarn install**
-`$ cd assets && yarn install`
+```bash
+$ cd assets && yarn install
+```
 
 ### Run Phoenix app:
 
@@ -82,7 +94,7 @@ Start the Phoenix server and run the application.
 
     $ mix phx.server
 
- ***or***
+**_or_**
 
     $ iex -S mix phx.server
 
@@ -99,5 +111,3 @@ Javascript tests:
 Elixir tests:
 
     $ mix test
-
-
