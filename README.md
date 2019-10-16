@@ -107,3 +107,7 @@ You can now access the **localhost:4000** link from your browser.
 Elixir tests:
 
     $ mix test
+
+Jest tests:
+
+    $ cd assets && yarn test
