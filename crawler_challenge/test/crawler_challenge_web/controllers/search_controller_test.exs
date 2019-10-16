@@ -1,12 +1,12 @@
 defmodule CrawlerChallengeWeb.SearchControllerTest do
-  use CrawlerChallengeWeb.ConnCase, async: true
+  use CrawlerChallengeWeb.ConnCase, async: false
 
   alias CrawlerChallengeWeb.SearchController
 
   describe "index/2" do
     test "returns {:valid, process} and render a json", %{conn: conn} do
       court = insert(:courts)
-      process = insert(:valid_process, court: court)
+      process = insert(:another_process, court: court)
 
       params = %{"court" => court.name, "process_n" => process.process_number}
 
@@ -15,15 +15,37 @@ defmodule CrawlerChallengeWeb.SearchControllerTest do
       assert json_response(conn, 200)
     end
 
-    test "returns {:invalid, nil} crawl and render a json", %{conn: conn} do
+    test "returns {:invalid, nil} with a non existing process_number in db, crawl and render a json",
+         %{conn: conn} do
       court = insert(:courts)
-      process = insert(:invalid_process, court: court)
 
-      params = %{"court" => court.name, "process_n" => process.process_number}
+      params = %{"court" => court.name, "process_n" => "0000214-28.2011.8.02.0081"}
 
       conn = post(conn, Routes.search_path(conn, :index, params))
 
       assert json_response(conn, 200)
+    end
+
+    test "returns {:error, :invalid_process_number} with a invalid process_number", %{conn: conn} do
+      court = insert(:courts)
+
+      params = %{"court" => court.name, "process_n" => "0000twi-28.nnnn.8.02.0081"}
+
+      conn = post(conn, Routes.search_path(conn, :index, params))
+
+      assert json_response(conn, 401)
+      assert %{"message" => "Número do processo inválido"} = json_response(conn, 401)
+    end
+
+    test "returns nil when court doesnt exists ", %{conn: conn} do
+      params = %{"court" => "", "process_n" => "0717561-98.2019.8.02.0001"}
+
+      conn = post(conn, Routes.search_path(conn, :index, params))
+
+      assert json_response(conn, 401)
+
+      assert %{"message" => "Preencha os dados do form: Campo 'Tribunal'"} =
+               json_response(conn, 401)
     end
   end
 

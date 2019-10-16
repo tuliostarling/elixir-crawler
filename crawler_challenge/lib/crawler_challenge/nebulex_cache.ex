@@ -4,7 +4,7 @@ defmodule CrawlerChallenge.NebulexCache do
     adapter: Nebulex.Adapters.Local
 
   def set_cache(key, process) do
-    set(key, process, ttl: 86400) 
+    set(key, process, ttl: 86_400)
   end
 
   def get_cache(token) do

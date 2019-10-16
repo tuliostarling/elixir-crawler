@@ -1,8 +1,7 @@
 defmodule CrawlerChallenge.ProcessesTest do
   use CrawlerChallenge.DataCase
 
-  alias CrawlerChallenge.Processes
-  alias CrawlerChallenge.Repo
+  alias CrawlerChallenge.{NebulexCache, Processes, Repo}
 
   import CrawlerChallenge.Unpreloader
 
@@ -30,6 +29,10 @@ defmodule CrawlerChallenge.ProcessesTest do
       assert Processes.get_process_by_number(process.process_number) == process |> forget(:court)
     end
 
+    test "get_process_by_number/1 dont return the process with non existing given number" do
+      refute Processes.get_process_by_number("0067154-55.2010.8.02.0001")
+    end
+
     test "get_process_by_id_and_preload/2 returns the process preloaded with the given id" do
       court = insert(:courts)
       process = insert(:process, court: court)
@@ -38,9 +41,44 @@ defmodule CrawlerChallenge.ProcessesTest do
                process |> forget(:court) |> Repo.preload([:details, :movements, :parties])
     end
 
-    test "validate_date/1 returs {:invalid, nil} when it does not exists" do
+    test "valid_process_number/1 returns {:error, :invalid_process_number} when string is empty" do
+      assert {:error, :invalid_process_number} = Processes.valid_process_number("")
+    end
+
+    test "valid_process_number/1 returns {:error, :invalid_process_number} when string dont have 25 characters" do
+      assert {:error, :invalid_process_number} = Processes.valid_process_number("111")
+    end
+
+    test "valid_process_number/1 returns {:error, :invalid_process_number} when string dont have the rigth structure" do
+      assert {:error, :invalid_process_number} =
+               Processes.valid_process_number("1111111-22.3333.802123112")
+    end
+
+    test "valid_process_number/1 returns {:error, :invalid_process_number} when string have letters" do
+      assert {:error, :invalid_process_number} =
+               Processes.valid_process_number("1111111-iy.tttt.8.02.123112")
+    end
+
+    test "valid_process_number/1 returns {:ok, :valid_process_number} when string is ok" do
+      process = insert(:process)
+      assert {:ok, :valid_process_number} = Processes.valid_process_number(process.process_number)
+    end
+
+    test "validate_date/1 returs {:invalid, nil} when it is nil" do
       process = nil
       assert {:invalid, nil} = Processes.validate_date(process)
+    end
+
+    test "validate_date/1 returs {:invalid, nil} when it does not exists" do
+      process = insert(:another_process)
+      assert {:invalid, nil} = Processes.validate_date(process.process_number)
+    end
+
+    test "validate_date/1 returs {:valid, data} when it exists" do
+      process = insert(:process)
+      NebulexCache.set_cache(process.process_number, process.id)
+      assert {:valid, %{id: id}} = Processes.validate_date(process.process_number)
+      assert id = process.id
     end
 
     test "get_last_process_and_preload/1 return last process and preload the associations" do

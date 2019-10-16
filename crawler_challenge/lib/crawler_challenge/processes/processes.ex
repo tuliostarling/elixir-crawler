@@ -13,6 +13,8 @@ defmodule CrawlerChallenge.Processes do
 
   alias Ecto.Multi
 
+  @regex_number_structure ~r/(([0-9]{7})-)(([0-9]{2}).)(([0-9]{4}).)(8.02.)([0-9]{4})/
+
   @doc """
   Returns the list of processes.
 
@@ -53,9 +55,12 @@ defmodule CrawlerChallenge.Processes do
   def valid_process_number(""), do: {:error, :invalid_process_number}
 
   def valid_process_number(process_n) do
-    case String.match?(process_n, ~r/[a-zA-Z]/) do
-      true -> {:error, :invalid_process_number}
-      false -> {:ok, :valid_process_number}
+    with false <- String.match?(process_n, ~r/[a-zA-Z]/),
+         25 <- String.length(process_n),
+         true <- String.match?(process_n, @regex_number_structure) do
+      {:ok, :valid_process_number}
+    else
+      _ -> {:error, :invalid_process_number}
     end
   end
 
@@ -63,6 +68,7 @@ defmodule CrawlerChallenge.Processes do
     case NebulexCache.get_cache(process) do
       {:error, :not_found} ->
         {:invalid, nil}
+
       {:ok, data} ->
         process = get_process!(data)
         {:valid, Repo.preload(process, [:details, :movements, :parties, :court])}
