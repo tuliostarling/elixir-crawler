@@ -4,12 +4,12 @@ import PropType from 'prop-types';
 
 const TextInput = (props) => {
   const {
-    class_name, type, id, placeholder, ...rest
+    nameClass, type, id, placeholder, ...rest
   } = props;
 
   return (
     <input
-      className={class_name}
+      className={nameClass}
       type={type}
       id={id}
       placeholder={placeholder}
@@ -20,7 +20,7 @@ const TextInput = (props) => {
 };
 
 TextInput.propTypes = {
-  class_name: PropType.string.isRequired,
+  nameClass: PropType.string.isRequired,
   type: PropType.string.isRequired,
   id: PropType.string.isRequired,
   placeholder: PropType.string.isRequired,

@@ -43,21 +43,6 @@ defmodule CrawlerChallenge.ProcessesTest do
       assert {:invalid, nil} = Processes.validate_date(process)
     end
 
-    test "check_expiration/1 returns {:valid, data} when process isn't more than 24h in db" do
-      process = insert(:valid_process)
-
-      %{id: _id} = process
-
-      assert {:valid, data} = Processes.check_expiration(process)
-      assert id = data.id
-    end
-
-    test "check_expiration/1 returns {:invalid, nil} when process isn't more than 24h in db" do
-      process = insert(:invalid_process)
-
-      assert {:invalid, nil} = Processes.check_expiration(process)
-    end
-
     test "get_last_process_and_preload/1 return last process and preload the associations" do
       court = insert(:courts)
       process = insert(:process, court: court)
@@ -102,7 +87,7 @@ defmodule CrawlerChallenge.ProcessesTest do
       ]
 
       assert {:ok, crawled_data} =
-               Processes.insert_all_data(process.process_number, court.name, crawled_data)
+               Processes.insert_all_data(process.process_number, court, crawled_data)
 
       %{id: _id} = process
 

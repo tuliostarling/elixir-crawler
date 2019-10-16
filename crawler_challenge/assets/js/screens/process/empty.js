@@ -21,5 +21,5 @@ EmptyPage.propTypes = {
 };
 
 EmptyPage.defaultProps = {
-  error: ""
+  error: {}
 };

@@ -3,11 +3,11 @@ import React from 'react';
 import PropType from 'prop-types';
 
 const SelectInput = props => {
-  const { class_name, options, ...rest } = props;
+  const { nameClass, options, ...rest } = props;
 
   return (
-    <select className={class_name} {...rest}>
-      <option value="">Selecione o tribunal</option>
+    <select className={nameClass} {...rest} defaultValue="">
+      <option value="" disabled>Selecione o tribunal</option>
       {options.map(option => (
         <option key={option.id} value={option.name}>
           {option.name} - ({option.initials})
@@ -18,7 +18,7 @@ const SelectInput = props => {
 };
 
 SelectInput.propTypes = {
-  class_name: PropType.string.isRequired,
+  nameClass: PropType.string.isRequired,
   options: PropType.arrayOf(
     PropType.shape({
       id: PropType.number.isRequired,

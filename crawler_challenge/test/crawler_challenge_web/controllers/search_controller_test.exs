@@ -1,11 +1,7 @@
 defmodule CrawlerChallengeWeb.SearchControllerTest do
-  use CrawlerChallengeWeb.ConnCase
+  use CrawlerChallengeWeb.ConnCase, async: true
 
   alias CrawlerChallengeWeb.SearchController
-
-  setup %{conn: conn} do
-    {:ok, conn: conn}
-  end
 
   describe "index/2" do
     test "returns {:valid, process} and render a json", %{conn: conn} do
@@ -34,9 +30,9 @@ defmodule CrawlerChallengeWeb.SearchControllerTest do
   describe "do_crawl/3" do
     test "crawl and render a json", %{conn: conn} do
       court = insert(:courts)
-      process = insert(:valid_process, court: court)
+      process = insert(:process, court: court)
 
-      conn = SearchController.do_crawl(conn, court.name, process.process_number)
+      conn = SearchController.do_crawl(conn, court, process.process_number)
 
       assert json_response(conn, 200)
     end
