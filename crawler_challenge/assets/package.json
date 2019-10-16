@@ -8,6 +8,8 @@
     "eslint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "glob": "^7.1.4",
     "materialize-css": "^1.0.0",
     "node-sass": "^4.12.0",
     "phoenix": "file:../deps/phoenix",
@@ -22,6 +24,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^0.28.10",

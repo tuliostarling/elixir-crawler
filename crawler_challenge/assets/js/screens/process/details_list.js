@@ -5,6 +5,8 @@ import PropType from 'prop-types';
 export const DetailsList = (props) => {
   const { details } = props;
 
+  console.log(details)
+
   return (
     <div className="detail_wrapper">
       <p className="detail_wrapper__value">
@@ -38,7 +40,7 @@ DetailsList.propTypes = {
     PropType.shape({
       id: PropType.number.isRequired,
       process_id: PropType.number.isRequired,
-      area: PropType.object.isRequired,
+      area: PropType.string.isRequired,
       class: PropType.string.isRequired,
       control: PropType.string,
       distribution_date: PropType.string.isRequired,
@@ -46,13 +48,13 @@ DetailsList.propTypes = {
       other_subject: PropType.string,
       process_number: PropType.string.isRequired,
       stock_price: PropType.string.isRequired,
-      subject: PropType.string.isRequired,
-    }),
-  ).isRequired,
+      subject: PropType.string.isRequired
+    })
+  ).isRequired
 };
 
 DetailsList.defaultProps = {
-  control: '',
-  judge: '',
-  other_subject: '',
+  control: null,
+  judge: null,
+  other_subject: null
 };

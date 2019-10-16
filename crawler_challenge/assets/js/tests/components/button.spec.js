@@ -1,3 +1,6 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
 import Button from '../../components/button';
 
 describe('<Button />', () => {
@@ -12,7 +15,7 @@ describe('<Button />', () => {
         onClick={mockHandleClick}
       >
         Buscar
-      </Button>
+      </Button>,
     );
 
     const button = component.find('button');
@@ -24,7 +27,7 @@ describe('<Button />', () => {
     const component = shallow(
       <Button nameClass="foo" type="submit" name="button" loading={false}>
         Buscar
-      </Button>
+      </Button>,
     );
 
     const button = component.find('button');

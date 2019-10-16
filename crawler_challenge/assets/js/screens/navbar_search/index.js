@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import 'babel-polyfill';
 
@@ -12,20 +12,18 @@ export default class NavbarSearch extends Component {
     const { context } = this;
 
     return (
-      <Fragment>
-        <header>
-          <nav>
-            <div className="nav-wrapper">
-              <SearchForm
-                courts={context.state.courts}
-                handleChange={context.handleChange}
-                handleSubmit={context.handleSubmit}
-                loading={context.state.loading}
-              />
-            </div>
-          </nav>
-        </header>
-      </Fragment>
+      <header>
+        <nav>
+          <div className="nav-wrapper">
+            <SearchForm
+              courts={context.state.courts}
+              handleChange={context.handleChange}
+              handleSubmit={context.handleSubmit}
+              loading={context.state.loading}
+            />
+          </div>
+        </nav>
+      </header>
     );
   }
 }

@@ -1,3 +1,6 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
 import { EmptyPage } from '../../../screens/process/empty';
 
 describe('<EmptyScreen />', () => {
@@ -11,7 +14,7 @@ describe('<EmptyScreen />', () => {
     const component = shallow(<EmptyPage message={null} />);
 
     expect(component.text()).toEqual(
-      'Insira dados no form para aparecer dados!'
+      'Insira dados no form para aparecer dados!',
     );
   });
 });

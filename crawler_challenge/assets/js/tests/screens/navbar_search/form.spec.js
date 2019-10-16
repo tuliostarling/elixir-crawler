@@ -1,3 +1,6 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
 import { SearchForm } from '../../../screens/navbar_search/form';
 import { Button, SelectInput, TextInput } from '../../../components';
 
@@ -11,7 +14,7 @@ describe('<SearchForm />', () => {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         loading={false}
-      />
+      />,
     );
     expect(component.find(Button)).toHaveLength(1);
     expect(component.find(TextInput)).toHaveLength(1);

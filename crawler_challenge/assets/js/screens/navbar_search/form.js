@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import PropType from 'prop-types';
 
 import { Button, SelectInput, TextInput } from '../../components';
 
 export const SearchForm = (props) => {
-  const { courts, handleChange, handleSubmit, loading } = props;
+  const {
+    courts, handleChange, handleSubmit, loading,
+  } = props;
 
   return (
-    <Fragment>
+    <>
       <div className="input-field col s12">
         <SelectInput
           nameClass="select_court_input"
@@ -33,9 +35,9 @@ export const SearchForm = (props) => {
         onClick={() => handleSubmit()}
         loading={loading}
       >
-        {loading == false ? 'Buscar' : 'Aguarde...'}
+        {loading === false ? 'Buscar' : 'Aguarde...'}
       </Button>
-    </Fragment>
+    </>
   );
 };
 

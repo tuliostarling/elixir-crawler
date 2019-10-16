@@ -9,7 +9,7 @@ export const EmptyPage = (props) => {
     <div className="wrapper__empty_header">
       <h4 className="wrapper__empty_header___title">
         {message == null
-          ? "Insira dados no form para aparecer dados!"
+          ? 'Insira dados no form para aparecer dados!'
           : message}
       </h4>
     </div>
@@ -17,9 +17,9 @@ export const EmptyPage = (props) => {
 };
 
 EmptyPage.propTypes = {
-  error: PropType.object.isRequired
+  message: PropType.string,
 };
 
 EmptyPage.defaultProps = {
-  error: {}
+  message: null,
 };
